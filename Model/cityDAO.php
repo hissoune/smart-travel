@@ -1,4 +1,6 @@
 <?php 
+include 'config\Connection.php';
+include 'Model\Classcity.php';
 
 class CityDAO{
 
