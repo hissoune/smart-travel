@@ -5,6 +5,7 @@
 
 
 <?php include 'head.php'; ?>
+<?php include 'view\nav.php'; ?>
    
 
 

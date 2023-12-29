@@ -1,6 +1,6 @@
 <?php
-require_once 'Brief9\config\Connection.php';
-require_once 'Brief9\Model\Bus.php';
+require_once 'config\Connection.php';
+require_once 'Model\ClassBus.php';
 
 class BusDao {
     private $db;
@@ -10,14 +10,14 @@ class BusDao {
     } 
 
     public function fetchingBuses() {
-        $query = "SELECT * FROM buses";
+        $query = "SELECT * FROM Bus";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
     public function addBus($bus) {
-        $query = "INSERT INTO buses (bus_number, license_plate, capacity, company_name) 
+        $query = "INSERT INTO bus (busnumber, licenseplate, capacity, companyname) 
                   VALUES ('" . $bus->getBusNumber() . "', '" . $bus->getLicensePlate() . "', '" . $bus->getCapacity() . "', '" . $bus->getCompanyName() . "')";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
