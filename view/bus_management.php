@@ -25,7 +25,7 @@
           <td><?= $bus['companyname']; ?></td>
           <td class="d-flex justify-content-center">
                 <a href="index.php?action=modify"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delet"  class="btn btn-outline-light btn-danger text-light ">delet</a>
+                <a href="index.php?action=delete&id=<?= $bus['busnumber']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 

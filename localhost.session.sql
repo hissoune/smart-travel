@@ -57,6 +57,54 @@ INSERT INTO City VALUES
 ('Casablanca'),('Fès'),('Tangier'),('Marrakech'),('Sale'),('Mediouna'),('Rabat'),('Meknès'),('Oujda-Angad'),('Kenitra'),('Agadir'),('Tétouan'),('Taourirt'),('Temara'),('Safi'),('Khénifra'),('Laâyoune'),('Mohammedia'),('Kouribga'),('El Jadida'),('Béni Mellal'),('Ait Melloul'),('Nador'),('Taza'),('Settat'),('Barrechid'),('Al Khmissat'),('Inezgane'),('Ksar El Kebir'),('Larache'),('Guelmim'),('Berkane'),('Khemis Sahel'),('Ad Dakhla'),('Bouskoura'),('Al Fqih Ben Çalah'),('Oued Zem'),('Sidi Slimane'),('Errachidia'),('Guercif'),('Oulad Teïma'),('Ben Guerir'),('Sefrou'),('Fnidq'),('Sidi Qacem'),('Moulay Abdallah'),('Youssoufia'),('Martil'),('Skhirate'),('Ouezzane'),('Sidi Yahya Zaer'),('Al Hoceïma'),('Mdiq'),('Sidi Bennour'),('Midalt'),('Azrou'),('Beni Yakhlef'),('Ad Darwa'),('Al Aaroui'),('El Aïoun'),('Azemmour'),('Temsia'),('Zagora'),('Ait Ourir'),('Aziylal'),('Sidi Yahia El Gharb'),('El Hajeb'),('Imzouren'),('Tit Mellil'),('Arfoud'),('Sidi Smaiil'),('Mehdya'),('Aïn Taoujdat'),('Chichaoua'),('Tahla'),('Moulay Bousselham'),('Oulad Tayeb'),('Bir Jdid'),('Tifariti');
 --@block
 
+INSERT INTO Road (distance, duration, startcity, endcity)
+VALUES 
+    (100.5, '2 hours', 'CityA', 'CityB'),
+    (75.2, '1.5 hours', 'CityB', 'CityC'),
+    (120.8, '3 hours', 'CityC', 'CityD'),
+    (50.0, '1 hour', 'CityD', 'CityE'),
+    (85.3, '2.5 hours', 'CityE', 'CityF'),
+    (200.0, '4 hours', 'CityF', 'CityG'),
+    (60.7, '1.8 hours', 'CityG', 'CityH'),
+    (90.1, '2.3 hours', 'CityH', 'CityI'),
+    (110.0, '2.7 hours', 'CityI', 'CityJ'),
+    (130.5, '3.5 hours', 'CityJ', 'CityK');
+
+-- Inserting data into the Company table
+INSERT INTO Company (companyname, shortname, img)
+VALUES 
+    ('Company A', 'CoA', 'company_a_logo.jpg'),
+    ('Company B', 'CoB', 'company_b_logo.jpg'),
+    ('Company C', 'CoC', 'company_c_logo.jpg');
+
+
+INSERT INTO Bus (busnumber, licenseplate, capacity, companyname)
+VALUES 
+    (1, 'ABC123', 50, 'Company A'),
+    (2, 'DEF456', 45, 'Company B'),
+    (3, 'GHI789', 60, 'Company C'),
+    (4, 'JKL012', 55, 'Company A'),
+    (5, 'MNO345', 40, 'Company B'),
+    (6, 'PQR678', 50, 'Company C'),
+    (7, 'STU901', 48, 'Company A'),
+    (8, 'VWX234', 52, 'Company B'),
+    (9, 'YZA567', 65, 'Company C'),
+    (10, 'BCD890', 44, 'Company A');
+
+
+INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, busnumber, startcity, endcity)
+VALUES 
+    ('2023-01-10', '08:00:00', '12:00:00', 40, 50.0, 1, 'CityA', 'CityB'),
+    ('2023-01-12', '09:30:00', '13:30:00', 35, 45.0, 2, 'CityB', 'CityC'),
+    ('2023-01-15', '10:45:00', '14:45:00', 50, 60.0, 3, 'CityC', 'CityD'),
+    ('2023-01-18', '11:20:00', '15:20:00', 42, 55.0, 4, 'CityD', 'CityE'),
+    ('2023-01-20', '12:00:00', '16:00:00', 48, 50.0, 5, 'CityE', 'CityF'),
+    ('2023-01-23', '13:30:00', '17:30:00', 55, 65.0, 6, 'CityF', 'CityG'),
+    ('2023-01-25', '14:15:00', '18:15:00', 38, 70.0, 7, 'CityG', 'CityH'),
+    ('2023-01-28', '15:00:00', '19:00:00', 46, 55.0, 8, 'CityH', 'CityI'),
+    ('2023-01-30', '16:20:00', '20:20:00', 60, 60.0, 9, 'CityI', 'CityJ'),
+    ('2023-02-02', '17:10:00', '21:10:00', 52, 65.0, 10, 'CityJ', 'CityK');
+
 
 --@block
 -- INSERT INTO Road (distance, duration, startcity, endcity) VALUES

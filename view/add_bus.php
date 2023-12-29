@@ -16,9 +16,14 @@
     <input type="number" class="form-control" id="capacity" placeholder="capacity" name="capacity">
   </div>
   
-  <div class="col-md-6">
-    <label for="companyname" class="form-label">company name</label>
-    <input type="text" class="form-control" id="companyname" name="companyname">
+  <div class="col-md-6 ">
+    <label for="companyname">company name</label>
+    <select name="companyname" id="companyname" class="col-12 p-2 rounded">
+    <?php foreach ($comp_slct as $comp) { ?>
+        <option value="<?= $comp['companyname']; ?>"><?= $comp['companyname']; ?></option>
+    <?php } ?>
+</select>
+
   </div>
   
   

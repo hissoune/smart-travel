@@ -1,20 +1,30 @@
 <?php
 require_once 'config\Connection.php';
-require_once 'Model\ClassBus.php';
+require_once 'Model\ClassCompany.php';
 
-class BusDao {
+class CompanyDAO {
     private $db;
 
     public function __construct(){
         $this->db = DatabaseConnection::getInstance()->getConnection();
     } 
 
-    public function fetchingBuses() {
-        $query = "SELECT * FROM Bus";
+    public function fetchingcompanys() {
+        $query = "SELECT * FROM Company";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        $comp = array();
+        foreach ($result as $row) {
+            // Append each company's details as an array to the $comp array
+            $comp[] = [
+                'companyname' => $row["companyname"],
+                'shortname' => $row["shortname"],
+                'img' => $row["img"]
+            ];
+        }
+        return $comp;
     }
+    
 
     public function addBus($bus) {
         $query = "INSERT INTO bus (busnumber, licenseplate, capacity, companyname) 
