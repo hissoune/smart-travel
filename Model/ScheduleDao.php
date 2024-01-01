@@ -20,12 +20,47 @@ class ScheduleDAO {
 
     public function getSchedulesByCitiesAndDate($departureCity, $arrivalCity ,$travelDate, $numberof_peapl)
     {
-        $query = "SELECT * FROM Schedule where startcity= '$departureCity' and endcity= '$arrivalCity' and availableseats>= $numberof_peapl and date='$travelDate' ";
+        $query = "SELECT Schedule.* ,Bus.licenseplate ,Bus.companyname  FROM Schedule join Bus on Schedule.bus_id = Bus.id     where startcity= '$departureCity' and endcity= '$arrivalCity' and availableseats>= $numberof_peapl and date='$travelDate' ";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
 
     }
+
+    public function getSchedulesByCitiesAndDateandfilter($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter, $busNameFilter, $companyNameFilter)
+    {
+        $query = "SELECT Schedule.*, Bus.licenseplate, Bus.companyname  
+                  FROM Schedule 
+                  JOIN Bus ON Schedule.bus_id = Bus.id
+                  WHERE startcity = :departureCity 
+                        AND endcity = :arrivalCity 
+                        AND availableseats >= :numPeople 
+                        AND date = :travelDate 
+                        AND Bus.licenseplate = :busNameFilter 
+                        AND Bus.companyname = :companyNameFilter";
+    
+        // Add the condition for ordering by price if $priceFilter is true
+        if ($priceFilter) {
+            $query .= " ORDER BY price ASC";
+        }
+    
+        $params = [
+            ':departureCity' => $departureCity,
+            ':arrivalCity' => $arrivalCity,
+            ':numPeople' => $numPeople,
+            ':travelDate' => $travelDate,
+            ':busNameFilter' => $busNameFilter,
+            ':companyNameFilter' => $companyNameFilter,
+        ];
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }
+    
+
 
 
 

@@ -19,6 +19,18 @@ include 'Model\ScheduleDao.php';
     
     
     }
+
+
+    public static function get_scheduel_filred($departureCity,$arrivalCity,$travelDate,$numPeople,$priceFilter,$busNameFilter,$companyNameFilter){
+            
+
+        $ScheduleDAO = new ScheduleDAO();
+        $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter($departureCity,$arrivalCity,$travelDate,$numPeople,$priceFilter,$busNameFilter,$companyNameFilter);
+        require_once 'view\serch.php';
+   
+
+
+}
     
     
 }
