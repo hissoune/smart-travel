@@ -20,7 +20,7 @@
     <label for="companyname">company name</label>
     <select name="companyname" id="companyname" class="col-12 p-2 rounded">
     <?php foreach ($comp_slct as $comp) { ?>
-        <option value="<?= $comp['companyname']; ?>"><?= $comp['companyname']; ?></option>
+        <option value="<?= $comp['id']; ?>"><?= $comp['companyname']; ?></option>
     <?php } ?>
 </select>
 

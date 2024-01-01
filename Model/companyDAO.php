@@ -17,6 +17,7 @@ class CompanyDAO {
         foreach ($result as $row) {
             // Append each company's details as an array to the $comp array
             $comp[] = [
+                  'id'=>$row["id"],
                 'companyname' => $row["companyname"],
                 'shortname' => $row["shortname"],
                 'img' => $row["img"]
@@ -26,13 +27,25 @@ class CompanyDAO {
     }
     
 
-    public function addBus($bus) {
-        $query = "INSERT INTO bus (busnumber, licenseplate, capacity, companyname) 
-                  VALUES ('" . $bus->getBusNumber() . "', '" . $bus->getLicensePlate() . "', '" . $bus->getCapacity() . "', '" . $bus->getCompanyName() . "')";
+    public function addcompany($comp) {
+        // Check if the company already exists based on company name
+        $query = "SELECT * FROM company WHERE companyname = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->execute();
+        $stmt->execute([$comp->getCompanyname()]);
+    
+        // Check if the company already exists
+        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo 'Company already exists.';
+        } else {
+            // Company doesn't exist, proceed with the insertion
+            $query = "INSERT INTO company (companyname, shortname, img) 
+                      VALUES (?, ?, ?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$comp->getCompanyname(), $comp->getShortname(), $comp->getImg()]);
+            echo 'Company added successfully.';
+        }
     }
-
+    
     public function modify($bus, $id) {
         $query = "UPDATE buses 
                   SET bus_number = '" . $bus->getBusNumber() . "', 

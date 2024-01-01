@@ -22,13 +22,13 @@
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=bus_management">bus managment</a>
+                        <a class="nav-link" href="index.php?action=company_manage">company managment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=bus_management">bus managment</a>
+                        <a class="nav-link" href="index.php?action=scheduel_management">scheduel managment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=bus_management">bus managment</a>
+                        <a class="nav-link" href="index.php?action=route_management">route managment</a>
                     </li>
                 </div>
         

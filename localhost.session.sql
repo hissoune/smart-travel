@@ -9,6 +9,7 @@ CREATE TABLE City (
 );
 --@block
 CREATE TABLE Road (
+    
     distance FLOAT,
     duration Time,
     startcity VARCHAR(255),
@@ -21,18 +22,21 @@ CREATE TABLE Road (
 
 --@block
 Create Table Company(
-    companyname VARCHAR(250) PRIMARY KEY,
+    id int  PRIMARY KEY AUTO_INCREMENT,
+    companyname VARCHAR(250) ,
     shortname VARCHAR(250) UNIQUE,
     img VARCHAR(250)
 );
 
 --@block
 CREATE TABLE Bus (
-    busnumber INT PRIMARY KEY ,
+    id int PRIMARY KEY AUTO_INCREMENT,
+    busnumber INT UNIQUE ,
     licenseplate VARCHAR(250) UNIQUE,
     capacity INT,
     companyname VARCHAR(250),
-    FOREIGN KEY (companyname) REFERENCES Company(companyname)
+    comp_id int ,
+    FOREIGN KEY (comp_id) REFERENCES Company(id)
     
 
 );
@@ -44,38 +48,70 @@ CREATE TABLE Schedule (
     arrivaltime Time,
     availableseats INT,
     price Float,  
-    busnumber INT,
+    bus_id INT,
     startcity VARCHAR(255),
     endcity VARCHAR(255), 
-    FOREIGN KEY (busnumber) REFERENCES Bus(busnumber),
+    FOREIGN KEY (bus_id) REFERENCES Bus(id),
     FOREIGN KEY (startcity, endcity) REFERENCES Road(startcity, endcity)
 
 );
 
 --@block
-INSERT INTO City VALUES
-('Casablanca'),('Fès'),('Tangier'),('Marrakech'),('Sale'),('Mediouna'),('Rabat'),('Meknès'),('Oujda-Angad'),('Kenitra'),('Agadir'),('Tétouan'),('Taourirt'),('Temara'),('Safi'),('Khénifra'),('Laâyoune'),('Mohammedia'),('Kouribga'),('El Jadida'),('Béni Mellal'),('Ait Melloul'),('Nador'),('Taza'),('Settat'),('Barrechid'),('Al Khmissat'),('Inezgane'),('Ksar El Kebir'),('Larache'),('Guelmim'),('Berkane'),('Khemis Sahel'),('Ad Dakhla'),('Bouskoura'),('Al Fqih Ben Çalah'),('Oued Zem'),('Sidi Slimane'),('Errachidia'),('Guercif'),('Oulad Teïma'),('Ben Guerir'),('Sefrou'),('Fnidq'),('Sidi Qacem'),('Moulay Abdallah'),('Youssoufia'),('Martil'),('Skhirate'),('Ouezzane'),('Sidi Yahya Zaer'),('Al Hoceïma'),('Mdiq'),('Sidi Bennour'),('Midalt'),('Azrou'),('Beni Yakhlef'),('Ad Darwa'),('Al Aaroui'),('El Aïoun'),('Azemmour'),('Temsia'),('Zagora'),('Ait Ourir'),('Aziylal'),('Sidi Yahia El Gharb'),('El Hajeb'),('Imzouren'),('Tit Mellil'),('Arfoud'),('Sidi Smaiil'),('Mehdya'),('Aïn Taoujdat'),('Chichaoua'),('Tahla'),('Moulay Bousselham'),('Oulad Tayeb'),('Bir Jdid'),('Tifariti');
---@block
 
-INSERT INTO Road (distance, duration, startcity, endcity)
-VALUES 
-    (100.5, '2 hours', 'CityA', 'CityB'),
-    (75.2, '1.5 hours', 'CityB', 'CityC'),
-    (120.8, '3 hours', 'CityC', 'CityD'),
-    (50.0, '1 hour', 'CityD', 'CityE'),
-    (85.3, '2.5 hours', 'CityE', 'CityF'),
-    (200.0, '4 hours', 'CityF', 'CityG'),
-    (60.7, '1.8 hours', 'CityG', 'CityH'),
-    (90.1, '2.3 hours', 'CityH', 'CityI'),
-    (110.0, '2.7 hours', 'CityI', 'CityJ'),
-    (130.5, '3.5 hours', 'CityJ', 'CityK');
+
+-- Inserting 30 roads with start and end cities from the City table
+-- Inserting 30 roads with start and end cities from the City table
+-- Avoiding duplicates in the City table
+INSERT IGNORE INTO City VALUES
+('Casablanca'),('Fès'),('Tangier'),('Marrakech'),('Sale'),('Mediouna'),('Rabat'),('Meknès'),('Oujda-Angad'),('Kenitra'),('Agadir'),('Tétouan'),('Taourirt'),('Temara'),('Safi'),('Khénifra'),('Laâyoune'),('Mohammedia'),('Kouribga'),('El Jadida'),('Béni Mellal'),('Ait Melloul'),('Nador'),('Taza'),('Settat'),('Barrechid'),('Al Khmissat'),('Inezgane'),('Ksar El Kebir'),('Larache'),('Guelmim'),('Berkane'),('Khemis Sahel'),('Ad Dakhla'),('Bouskoura'),('Al Fqih Ben Çalah'),('Oued Zem'),('Sidi Slimane'),('Errachidia'),('Guercif'),('Oulad Teïma'),('Ben Guerir'),('Sefrou'),('Fnidq'),('Sidi Qacem'),('Moulay Abdallah'),('Youssoufia'),('Martil'),('Skhirate'),('Ouezzane'),('Sidi Yahya Zaer'),('Al Hoceïma'),('Mdiq'),('Sidi Bennour'),('Midalt'),('Azrou'),('Beni Yakhlef'),('Ad Darwa'),('Al Aaroui'),('El Aïoun'),('Azemmour'),('Temsia'),('Zagora'),('Ait Ourir'),('Aziylal'),('Sidi Yahia El Gharb'),('El Hajeb'),('Imzouren'),('Tit Mellil'),('Arfoud'),('Sidi Smaiil'),('Mehdya'),('Aïn Taoujdat'),('Chichaoua'),('Tahla'),('Moulay Bousselham'),('Oulad Tayeb'),('Bir Jdid'),('Tifariti');
+
+-- Inserting 30 roads with start and end cities from the City table
+INSERT IGNORE INTO Road (distance, duration, startcity, endcity)
+VALUES
+    (100.5, '2 hours', 'Casablanca', 'Fès'),
+    (75.2, '1.5 hours', 'Fès', 'Tangier'),
+    (120.8, '3 hours', 'Tangier', 'Marrakech'),
+    (50.0, '1 hour', 'Marrakech', 'Sale'),
+    (85.3, '2.5 hours', 'Sale', 'Rabat'),
+    (200.0, '4 hours', 'Rabat', 'Meknès'),
+    (90.1, '2.3 hours', 'Rabat', 'Kenitra'),
+    -- Add more roads as needed
+    (110.0, '2.7 hours', 'Casablanca', 'Sale'),
+    (130.5, '3.5 hours', 'Meknès', 'Fès'),
+    -- Add more roads as needed
+    (80.0, '2 hours', 'Tangier', 'Rabat'),
+    (45.0, '1.2 hours', 'Marrakech', 'Fès'),
+    -- Add more roads as needed
+    (150.0, '3.5 hours', 'Sale', 'Oujda-Angad'),
+    (70.0, '1.5 hours', 'Casablanca', 'Meknès'),
+    -- Add more roads as needed
+    (180.0, '4 hours', 'Rabat', 'Tangier'),
+    (95.0, '2 hours', 'Fès', 'Kenitra'),
+    -- Add more roads as needed
+    (120.0, '2.5 hours', 'Casablanca', 'Rabat'),
+    (55.0, '1.3 hours', 'Meknès', 'Oujda-Angad'),
+    -- Add more roads as needed
+    (200.0, '3.5 hours', 'Sale', 'Marrakech'),
+    (65.0, '1.7 hours', 'Rabat', 'Kenitra'),
+    -- Add more roads as needed
+    (90.0, '2 hours', 'Casablanca', 'Tangier'),
+    (40.0, '1 hour', 'Marrakech', 'Kenitra'),
+    -- Add more roads as needed
+    (110.0, '2.5 hours', 'Sale', 'Fès'),
+    (75.0, '1.8 hours', 'Rabat', 'Oujda-Angad'),
+    -- Add more roads as needed
+    (130.0, '3 hours', 'Casablanca', 'Marrakech'),
+    (50.0, '1 hour', 'Fès', 'Tangier');
+    -- Add more roads as needed
+
+
 
 -- Inserting data into the Company table
 INSERT INTO Company (companyname, shortname, img)
 VALUES 
     ('Company A', 'CoA', 'company_a_logo.jpg'),
-    ('Company B', 'CoB', 'company_b_logo.jpg'),
-    ('Company C', 'CoC', 'company_c_logo.jpg');
+    ('Company B', 'CoB', 'images/company_b_logo.jpg'),
+    ('Company C', 'CoC', 'images/company_c_logo.jpg');
 
 
 INSERT INTO Bus (busnumber, licenseplate, capacity, companyname)
@@ -92,261 +128,10 @@ VALUES
     (10, 'BCD890', 44, 'Company A');
 
 
-INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, busnumber, startcity, endcity)
-VALUES 
-    ('2023-01-10', '08:00:00', '12:00:00', 40, 50.0, 1, 'CityA', 'CityB'),
-    ('2023-01-12', '09:30:00', '13:30:00', 35, 45.0, 2, 'CityB', 'CityC'),
-    ('2023-01-15', '10:45:00', '14:45:00', 50, 60.0, 3, 'CityC', 'CityD'),
-    ('2023-01-18', '11:20:00', '15:20:00', 42, 55.0, 4, 'CityD', 'CityE'),
-    ('2023-01-20', '12:00:00', '16:00:00', 48, 50.0, 5, 'CityE', 'CityF'),
-    ('2023-01-23', '13:30:00', '17:30:00', 55, 65.0, 6, 'CityF', 'CityG'),
-    ('2023-01-25', '14:15:00', '18:15:00', 38, 70.0, 7, 'CityG', 'CityH'),
-    ('2023-01-28', '15:00:00', '19:00:00', 46, 55.0, 8, 'CityH', 'CityI'),
-    ('2023-01-30', '16:20:00', '20:20:00', 60, 60.0, 9, 'CityI', 'CityJ'),
-    ('2023-02-02', '17:10:00', '21:10:00', 52, 65.0, 10, 'CityJ', 'CityK');
-
-
---@block
--- INSERT INTO Road (distance, duration, startcity, endcity) VALUES
--- (250.5, '2:30:00', 'Casablanca', 'Fès'),
--- (200.0, '3:00:00', 'Casablanca', 'Tangier'),
--- (100.0, '1:30:00', 'Fès', 'Marrakech'),
--- (80.0, '1:30:00', 'El Jadida', 'Casablanca'),
--- (60.0, '0:45:00', 'El Jadida', 'Rabat'),
--- (200.0, '4:30:00', 'El Jadida', 'Marrakech'),
--- (80.0, '1:30:00', 'Casablanca', 'El Jadida'),
--- (60.0, '0:45:00', 'Rabat', 'El Jadida'),
--- (100.0,'3:30:00','Safi', 'El Jadida'),
--- (100.0,'3:30:00', 'El Jadida','Safi'),
--- (250.0,'4:30:00','Safi', 'Casablanca'),
--- (250.0, '4:30:00', 'Casablanca', 'Safi'),
--- (200.0, '4:30:00', 'Marrakech', 'El Jadida'),
--- (120.0, '1:30:00', 'Casablanca', 'Rabat'),
--- (200.0, '2:45:00', 'Casablanca', 'Marrakech'),
--- (120.0, '1:30:00', 'Rabat', 'Casablanca'),
--- (180.0, '2:15:00', 'Rabat', 'Marrakech'),
--- (300.0, '4:00:00', 'Zagora', 'Casablanca'),
--- (250.0, '3:30:00', 'Zagora', 'Agadir'),
--- (400.0, '5:30:00', 'Zagora', 'El Jadida'),
--- (350.0, '4:45:00', 'Zagora', 'Safi'),
--- (100.0, '1:45:00', 'Rabat', 'Safi'),
--- (150.0, '2:15:00', 'Agadir', 'Casablanca'),
--- (120.0, '1:45:00', 'Agadir', 'El Jadida'),
--- (90.0, '1:15:00', 'Agadir', 'Safi'),
--- (60.0, '0:45:00', 'El Jadida', 'Agadir')
-
--- --@block
--- INSERT INTO Bus VALUES
--- (1, 'ABC123', 50, 'Compagnie de transports au Maroc'),
--- (2, 'XYZ456', 40, 'TajVoyage'),
--- (4, 'PQR012', 55, 'SAT First'),
--- (5, 'JKL345', 60, 'Ghazala'),
--- (6, 'DEF678', 48, 'Sotram'),
--- (7, 'MNO901', 42, 'GloBus Trans'),
--- (8, 'IJK890', 46, 'Trans Al Yamama'),
--- (9, 'NOP123', 52, 'Pullman Du Sud'),
--- (10, 'ABC456', 40, 'Trans Annamir'),
--- (11, 'ABC789', 50, 'Compagnie de transports au Maroc'),
--- (12, 'XYZ012', 45, 'Compagnie de transports au Maroc'),
--- (13, 'LMN567', 42, 'TajVoyage'),
--- (14, 'PQR890', 48, 'TajVoyage'),
--- (15, 'JKL901', 55, 'Pullman Du Sud'),
--- (16, 'DEF234', 46, 'Pullman Du Sud'),
--- (17, 'MNO567', 60, 'Ghazala'),
--- (18, 'RST890', 52, 'Ghazala')
--- --@block
--- INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, busnumber, startcity, endcity) VALUES
--- ('2024-01-17', '14:00:00', '18:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-18', '16:30:00', '21:00:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-19', '09:00:00', '13:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-20', '08:00:00', '12:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-20', '11:30:00', '16:00:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-20', '14:00:00', '18:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-17', '08:00:00', '12:30:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-18', '11:30:00', '16:00:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-19', '14:00:00', '18:30:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-20', '16:30:00', '21:00:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-20', '19:00:00', '23:30:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-20', '22:00:00', '02:30:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-18', '10:00:00', '14:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-18', '13:30:00', '18:00:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-18', '16:00:00', '20:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-18', '08:30:00', '13:00:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-18', '11:00:00', '15:30:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-18', '14:30:00', '19:00:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-19', '12:00:00', '16:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-19', '18:00:00', '22:30:00', 40, 200.0, 1, 'Safi', 'El Jadida'),
--- ('2024-01-19', '09:30:00', '14:00:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-19', '12:00:00', '16:30:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-19', '15:30:00', '20:00:00', 30, 150.0, 1, 'El Jadida', 'Safi'),
--- ('2024-01-17', '14:00:00', '18:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-18', '16:30:00', '21:00:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-19', '09:00:00', '13:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-20', '08:00:00', '12:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-20', '11:30:00', '16:00:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-20', '14:00:00', '18:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-17', '08:00:00', '12:30:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-18', '11:30:00', '16:00:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-19', '14:00:00', '18:30:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-20', '16:30:00', '21:00:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-20', '19:00:00', '23:30:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-20', '22:00:00', '02:30:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-18', '10:00:00', '14:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-18', '13:30:00', '18:00:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-18', '16:00:00', '20:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-18', '08:30:00', '13:00:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-18', '11:00:00', '15:30:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-18', '14:30:00', '19:00:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-19', '12:00:00', '16:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-19', '18:00:00', '22:30:00', 40, 200.0, 2, 'Safi', 'El Jadida'),
--- ('2024-01-19', '09:30:00', '14:00:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-19', '12:00:00', '16:30:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-19', '15:30:00', '20:00:00', 30, 150.0, 2, 'El Jadida', 'Safi'),
--- ('2024-01-17', '14:00:00', '18:30:00', 25, 180.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '16:30:00', '21:00:00', 30, 190.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '09:00:00', '13:30:00', 20, 170.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-20', '08:00:00', '12:30:00', 25, 185.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-20', '11:30:00', '16:00:00', 28, 195.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-20', '14:00:00', '18:30:00', 22, 175.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-17', '08:00:00', '12:30:00', 18, 160.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '11:30:00', '16:00:00', 15, 150.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '14:00:00', '18:30:00', 20, 170.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-20', '16:30:00', '21:00:00', 17, 165.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-20', '19:00:00', '23:30:00', 12, 140.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-20', '22:00:00', '02:30:00', 10, 130.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '10:00:00', '14:30:00', 28, 195.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '13:30:00', '18:00:00', 22, 175.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '16:00:00', '20:30:00', 25, 185.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '08:30:00', '13:00:00', 15, 150.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '11:00:00', '15:30:00', 20, 170.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '14:30:00', '19:00:00', 18, 160.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '12:00:00', '16:30:00', 30, 190.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 22, 175.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '18:00:00', '22:30:00', 25, 185.0, 7, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '09:30:00', '14:00:00', 12, 140.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '12:00:00', '16:30:00', 18, 160.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '15:30:00', '20:00:00', 20, 170.0, 7, 'El Jadida', 'Agadir'),
--- ('2024-01-17', '14:00:00', '18:30:00', 20, 170.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '16:30:00', '21:00:00', 15, 160.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '09:00:00', '13:30:00', 18, 160.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-20', '08:00:00', '12:30:00', 22, 175.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-20', '11:30:00', '16:00:00', 25, 185.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-20', '14:00:00', '18:30:00', 30, 190.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-17', '08:00:00', '12:30:00', 15, 160.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '11:30:00', '16:00:00', 20, 170.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '14:00:00', '18:30:00', 18, 160.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-20', '16:30:00', '21:00:00', 12, 140.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-20', '19:00:00', '23:30:00', 10, 130.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-20', '22:00:00', '02:30:00', 8, 120.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '10:00:00', '14:30:00', 25, 185.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '13:30:00', '18:00:00', 30, 190.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '16:00:00', '20:30:00', 22, 175.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-18', '08:30:00', '13:00:00', 18, 160.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '11:00:00', '15:30:00', 20, 170.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-18', '14:30:00', '19:00:00', 15, 160.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '12:00:00', '16:30:00', 30, 190.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 22, 175.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '18:00:00', '22:30:00', 25, 185.0, 4, 'Agadir', 'El Jadida'),
--- ('2024-01-19', '09:30:00', '14:00:00', 12, 140.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '12:00:00', '16:30:00', 18, 160.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-19', '15:30:00', '20:00:00', 20, 170.0, 4, 'El Jadida', 'Agadir'),
--- ('2024-01-17', '14:00:00', '18:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '16:30:00', '21:00:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '09:00:00', '13:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-20', '08:00:00', '12:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-20', '11:30:00', '16:00:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-20', '14:00:00', '18:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-17', '08:00:00', '12:30:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '11:30:00', '16:00:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '14:00:00', '18:30:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-20', '16:30:00', '21:00:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-20', '19:00:00', '23:30:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-20', '22:00:00', '02:30:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '10:00:00', '14:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '13:30:00', '18:00:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '16:00:00', '20:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '08:30:00', '13:00:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '11:00:00', '15:30:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '14:30:00', '19:00:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '12:00:00', '16:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '18:00:00', '22:30:00', 40, 200.0, 5, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '09:30:00', '14:00:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '12:00:00', '16:30:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '15:30:00', '20:00:00', 30, 150.0, 5, 'El Jadida', 'Casablanca'),
--- ('2024-01-17', '14:00:00', '18:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '16:30:00', '21:00:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '09:00:00', '13:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-20', '08:00:00', '12:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-20', '11:30:00', '16:00:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-20', '14:00:00', '18:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-17', '08:00:00', '12:30:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '11:30:00', '16:00:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '14:00:00', '18:30:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-20', '16:30:00', '21:00:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-20', '19:00:00', '23:30:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-20', '22:00:00', '02:30:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '10:00:00', '14:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '13:30:00', '18:00:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '16:00:00', '20:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-18', '08:30:00', '13:00:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '11:00:00', '15:30:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-18', '14:30:00', '19:00:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '12:00:00', '16:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '15:30:00', '20:00:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '18:00:00', '22:30:00', 40, 200.0, 6, 'El Jadida', 'Casablanca'),
--- ('2024-01-19', '09:30:00', '14:00:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '12:00:00', '16:30:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 30, 150.0, 6, 'Casablanca', 'El Jadida'),
--- ('2024-01-17', '14:00:00', '18:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '16:30:00', '21:00:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '09:00:00', '13:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-20', '08:00:00', '12:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-20', '11:30:00', '16:00:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-20', '14:00:00', '18:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-17', '08:00:00', '12:30:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '11:30:00', '16:00:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '14:00:00', '18:30:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-20', '16:30:00', '21:00:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-20', '19:00:00', '23:30:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-20', '22:00:00', '02:30:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '10:00:00', '14:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '13:30:00', '18:00:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '16:00:00', '20:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '08:30:00', '13:00:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '11:00:00', '15:30:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '14:30:00', '19:00:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '12:00:00', '16:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '15:30:00', '20:00:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '18:00:00', '22:30:00', 15, 100.0, 9, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '09:30:00', '14:00:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '12:00:00', '16:30:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 10, 80.0, 9, 'Marrakech', 'El Jadida'),
--- ('2024-01-17', '14:00:00', '18:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '16:30:00', '21:00:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '09:00:00', '13:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-20', '08:00:00', '12:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-20', '11:30:00', '16:00:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-20', '14:00:00', '18:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-17', '08:00:00', '12:30:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '11:30:00', '16:00:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '14:00:00', '18:30:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-20', '16:30:00', '21:00:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-20', '19:00:00', '23:30:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-20', '22:00:00', '02:30:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '10:00:00', '14:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '13:30:00', '18:00:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '16:00:00', '20:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-18', '08:30:00', '13:00:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '11:00:00', '15:30:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-18', '14:30:00', '19:00:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '12:00:00', '16:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '15:30:00', '20:00:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '18:00:00', '22:30:00', 10, 80.0, 10, 'Marrakech', 'El Jadida'),
--- ('2024-01-19', '09:30:00', '14:00:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '12:00:00', '16:30:00', 15, 100.0, 10, 'El Jadida', 'Marrakech'),
--- ('2024-01-19', '15:30:00', '20:00:00', 15, 100.0, 10, 'El Jadida', 'Marrakech')
-
-
+    -- Inserting schedules for bus ID 1
+-- Inserting schedules for bus ID 1
+INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, bus_id, startcity, endcity)
+VALUES
+    ('2023-01-01', '08:00:00', '12:00:00', 30, 50.0, 1, 'Casablanca', 'Fès'),
+    ('2023-01-02', '10:00:00', '14:00:00', 25, 45.0, 1, 'Fès', 'Tangier');
+    -- Add more scheduling information based on your requirements and available data

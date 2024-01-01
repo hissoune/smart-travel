@@ -1,8 +1,8 @@
 
 <?php
 
-require_once 'YourDatabaseConnection.php';
-require_once 'Schedule.php';
+require_once 'config\Connection.php';
+require_once 'Model\ClassSchedule.php';
 
 class ScheduleDAO {
     private $db;
@@ -15,8 +15,19 @@ class ScheduleDAO {
         $query = "SELECT * FROM Schedule";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        // SELECT * FROM Schedule where startcity= '' and endcity= '' and availableseats>= 22;
     }
+
+    public function getSchedulesByCitiesAndDate($departureCity, $arrivalCity ,$travelDate, $numberof_peapl)
+    {
+        $query = "SELECT * FROM Schedule where startcity= '$departureCity' and endcity= '$arrivalCity' and availableseats>= $numberof_peapl and date='$travelDate' ";
+        $stmt = $this->db->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+
+    }
+
+
 
     public function addSchedule($schedule) {
         $query = "INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, busnumber, startcity, endcity) 

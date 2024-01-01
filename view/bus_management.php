@@ -1,4 +1,4 @@
-<?php include 'head.php'; ?>
+<?php include 'view\head.php'; ?>
 <?php include 'view\nav.php'; ?>
 
 
@@ -24,8 +24,9 @@
           <td><?= $bus['capacity']; ?></td>
           <td><?= $bus['companyname']; ?></td>
           <td class="d-flex justify-content-center">
-                <a href="index.php?action=modify"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delete&id=<?= $bus['busnumber']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
+            <input type="hidden " value="<?= $bus['id']; ?>">
+                <a href="index.php?action=modify_bus&id=<?= $bus['id']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
+                <a href="index.php?action=delete&id=<?= $bus['id']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 

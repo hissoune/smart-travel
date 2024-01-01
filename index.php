@@ -8,40 +8,96 @@ if (isset($_GET['action']) ) {
 
 switch ($action) {
     case 'home':
-        include 'Controller\controler_ville.php';
+        require_once 'Controller\controler_ville.php';
         $controlerville = new Controler_ville();
         $controlerville->get_ville_ville();
         break;
     
     case 'bus_management':
-        include 'Controller\buscontroler\buscontroler.php';
+        require_once 'Controller\buscontroler\buscontroler.php';
         $controlerbus = new Controler_bus();
         $controlerbus->get_buses();
         break;
 
         case 'add_bus':
-            include 'Controller\buscontroler\buscontroler.php';
+            require_once 'Controller\buscontroler\buscontroler.php';
             $controlerbus = new Controler_bus();
            $controlerbus->get_comp_select();
             
        
             break;
+            case 'modify_bus' : 
+                $ID = $_GET['id'];
+                require_once 'Controller\buscontroler\buscontroler.php';
+                $controlerbus = new Controler_bus();
+               $controlerbus->get_comp_select_modify($ID);
+               break;
 
             case 'insert_buses':
-                include 'Controller\buscontroler\buscontroler.php';
+                require_once 'Controller\buscontroler\buscontroler.php';
                  $controlerbus = new Controler_bus();
                  $controlerbus->insert_buses();
            
                 break;
+                case 'modify_buses':
+                    $ID = $_GET['id'];
+                    require_once 'Controller\buscontroler\buscontroler.php';
+                 $controlerbus = new Controler_bus();
+                 $controlerbus->modify_buses($ID);
+
+
+                    break;
                 case 'delete':
                     $ID = $_GET['id'];
                     
-                    include 'Controller\buscontroler\buscontroler.php';
+                    require_once 'Controller\buscontroler\buscontroler.php';
                     
                      $controlerbus = new Controler_bus();
                      $controlerbus->delet_buses($ID);
                
                     break;
+                    case 'company_manage':
+                        require_once 'Controller\company_control.php';
+                        $controlerbus = new Controler_company();
+                        $controlerbus->get_comanies();
+                        break;
+
+                        case 'add_company':
+                            require_once 'view\add_comp.php';
+                            
+                           break;
+
+                           case 'insert_companys':
+                            require_once 'Controller\company_control.php';
+                             $controlercomp = new Controler_company();
+                             $controlercomp->insert_compaany();
+                       
+                            break;
+                            case 'scheduel_management':
+                                require_once 'Controller\scheduel_control.php';
+                                $controler_sched = new Controler_schet();
+                                $controler_sched->get_scheduel();
+                                break;
+
+                                case 'route_management':
+                                    require_once 'Controller\road-controler.php';
+                                    $controler_rout = new RouteController();
+                                    $controler_rout->indexRout();
+                                    break;
+                           
+                                    case 'serch':
+                                        $departureCity = isset($_GET['departureCity']) ? $_GET['departureCity'] : null;
+                                        $arrivalCity = isset($_GET['arrivalCity']) ? $_GET['arrivalCity'] : null;
+                                        $travelDate = isset($_GET['date_trip']) ? $_GET['date_trip'] : null;
+                                        $numPeople = isset($_GET['num_papl']) ? $_GET['num_papl'] : null;
+                                        
+                                            
+                                        require_once 'Controller\scheduel_control.php';
+                                        $controler_sched = new Controler_schet();
+                                        $controler_sched->get_scheduel_serch($departureCity,$arrivalCity,$travelDate,$numPeople);
+                                      
+                                        break;
+                               
     
 
     // Add more cases as needed
@@ -53,7 +109,7 @@ switch ($action) {
 }
 
 }else {
-    include 'Controller\controler_ville.php';
+    require_once 'Controller\controler_ville.php';
     $controlerville = new Controler_ville();
     $controlerville->get_ville_ville();
 }

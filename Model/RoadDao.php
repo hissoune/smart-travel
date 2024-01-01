@@ -1,6 +1,6 @@
 <?php
-require_once 'YourDatabaseConnection.php';
-require_once 'Road.php';
+require_once 'config\Connection.php';
+require_once 'Model\ClassRoad.php';
 
 class RoadDao {
     private $db;
@@ -10,14 +10,14 @@ class RoadDao {
     } 
 
     public function getAllRoads() {
-        $query = "SELECT * FROM roads";
+        $query = "SELECT * FROM Road";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
     public function addRoad($road) {
-        $query = "INSERT INTO roads (distance, duration, start_city, end_city) 
+        $query = "INSERT INTO Road (distance, duration, start_city, end_city) 
                   VALUES (:distance, :duration, :start_city, :end_city)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':distance', $road->getDistance());
@@ -28,7 +28,7 @@ class RoadDao {
     }
 
     public function updateRoad($road, $id) {
-        $query = "UPDATE roads 
+        $query = "UPDATE Road 
                   SET distance = :distance, 
                       duration = :duration, 
                       start_city = :start_city, 
@@ -44,7 +44,7 @@ class RoadDao {
     }
 
     public function deleteRoad($id) {
-        $query = "DELETE FROM roads WHERE road_id = :id";
+        $query = "DELETE FROM Road WHERE road_id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
