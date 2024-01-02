@@ -109,29 +109,147 @@ VALUES
 -- Inserting data into the Company table
 INSERT INTO Company (companyname, shortname, img)
 VALUES 
-    ('Company A', 'CoA', 'company_a_logo.jpg'),
-    ('Company B', 'CoB', 'images/company_b_logo.jpg'),
-    ('Company C', 'CoC', 'images/company_c_logo.jpg');
+    ('AlWissamAddahabi', 'ALA', 'AlWissamAddahabi.jpg'),
+    ('BabAllah', 'BAL', 'BabAllah.jpg'),
+    ('BabSalama', 'BBS', 'BabSalama.jpg'),
+    ('bismilah', 'BLAH', 'bismilah.jpg'),
+    ('CATIEM ', 'ctm', 'ctm.jpg'),
+    ('ghazala', 'ghz', 'ghazala.jpg'),
+    ('GloBus', 'GB', 'GloBus.jpg'),
+    ('ItraneSouss', 'IS', 'ItraneSouss.jpg'),
+    ('JanaViajes', 'JV', 'JanaViajes.jpg'),
+    ('PullmanDuSud', 'BDS', 'PullmanDuSud.jpg'),
+    ('SalamaVoyages', 'SV', 'SalamaVoyages.jpg'),
+    ('SAT_First', 'SF', 'SAT_First.jpg'),
+    ('sotram', 'STR', 'sotram.jpg'),
+    ('Supratours', 'ST', 'Supratours.jpg'),
+    ('taj', 'taj', 'taj.jpg'),
+    ('TransAlYamama', 'TA', 'TransAlYamama.jpg'),
+    ('TransAnnamir', 'TAN', 'TransAnnamir.jpg'),
+    ('TransFadila', 'TF', 'TransFadila.jpg');
 
 
-INSERT INTO Bus (busnumber, licenseplate, capacity, companyname)
+INSERT INTO Bus (busnumber, licenseplate, capacity,comp_id )
 VALUES 
-    (1, 'ABC123', 50, 'Company A'),
-    (2, 'DEF456', 45, 'Company B'),
-    (3, 'GHI789', 60, 'Company C'),
-    (4, 'JKL012', 55, 'Company A'),
-    (5, 'MNO345', 40, 'Company B'),
-    (6, 'PQR678', 50, 'Company C'),
-    (7, 'STU901', 48, 'Company A'),
-    (8, 'VWX234', 52, 'Company B'),
-    (9, 'YZA567', 65, 'Company C'),
-    (10, 'BCD890', 44, 'Company A');
+     (1, 'ABC123', 50,1 ),
+    (2, 'DEF456', 45,2 ),
+    (3, 'GHI789', 60,1),
+    (4, 'JKL012', 55,1),
+    (5, 'MNO345', 40,2),
+    (6, 'PQR678', 50,2),
+    (7, 'STU901', 48,1),
+    (8, 'VWX234', 52,1),
+    (9, 'YZA567', 66,2),
+    (10, 'YSA567', 65,3),
+    (11, 'YAA567', 65,4),
+    (12, 'YBA567', 65,5 ),
+    (13, 'YTTA567', 65,3 ),
+    (14, 'YUUA567', 65,6 ),
+    (15, 'YRE567', 65,7 ),
+    (16, 'YZE567', 65, 9),
+    (17, 'YZA533', 65, 8),
+    (18, 'YFF567', 65, 7),
+    (19, 'YZYUI67', 65,10 ),
+    (20, 'YZ22367', 65,12),
+    (21, 'YZEER67', 65, 11),
+    (22, 'YZZER67', 65,13 ),
+    (23, 'YZAZE67', 65, 4),
+    (24, 'BFFD890', 44, 5),
+     (25, 'EFF901', 55, 7),
+    (26, 'HIFF234', 60,6),
+    (27, 'KJ567', 45,9 ),
+    (28, 'NOGH890', 50,9),
+    (29, 'QLM123', 48, 15),
+    (30, 'TUFD56', 52,12),
+    (31, 'WAQZ01', 65,9 ),
+    (32, 'ABDS34', 65,7 ),
+    (33, 'DEF567', 65,6 ),
+    (34, 'GHI890', 65,4 ),
+    (35, 'JKL123', 65, 5),
+    (36, 'MNO456', 65, 2),
+    (37, 'PQR789', 65, 7),
+    (38, 'STU012', 65, 9),
+    (39, 'VWX345', 65, 7),
+    (40, 'YZA678', 65, 4),
+    (41, 'BCD901', 65, 13),
+    (42, 'EFG234', 65,2 ),
+    (43, 'HIJ567', 65,8 ),
+    (44, 'KLM890', 65, 5),
+    (45, 'NOP123', 65,4 ),
+    (46, 'QRS456', 65,3 ),
+    (47, 'TUV789', 65, 2),
+    (48, 'WXYZ12', 65,6 );
 
 
     -- Inserting schedules for bus ID 1
--- Inserting schedules for bus ID 1
+
 INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, bus_id, startcity, endcity)
 VALUES
-    ('2023-01-01', '08:00:00', '12:00:00', 30, 50.0, 1, 'Casablanca', 'Fès'),
-    ('2023-01-02', '10:00:00', '14:00:00', 25, 45.0, 1, 'Fès', 'Tangier');
-    -- Add more scheduling information based on your requirements and available data
+    ('2024-01-01', '08:00:00', '12:00:00', 30, 50.0, 1, 'Casablanca', 'Fès'),
+    ('2024-01-02', '10:00:00', '14:00:00', 25, 45.0,5, 'Fès', 'Tangier'),
+    -- Add more values as needed
+    ('2024-01-14', '09:00:00', '13:00:00', 28, 55.0, 2, 'Tangier', 'Marrakech'),
+    ('2024-01-15', '11:00:00', '15:00:00', 20, 40.0, 6, 'Marrakech', 'Sale'),
+    -- Add more values as needed
+    ('2024-01-05', '08:30:00', '12:30:00', 32, 60.0, 3, 'Sale', 'Rabat'),
+    ('2024-01-06', '10:30:00', '14:30:00', 22, 35.0, 8, 'Rabat', 'Meknès'),
+
+     ('2024-01-07', '09:30:00', '13:30:00', 28, 55.0, 4, 'Rabat', 'Kenitra'),
+    ('2024-01-08', '11:30:00', '15:30:00', 20, 40.0, 9, 'Casablanca', 'Sale'),
+    -- Schedule for bus number 5
+    ('2024-01-09', '08:45:00', '12:45:00', 32, 60.0, 5, 'Meknès', 'Fès'),
+    ('2024-01-10', '10:45:00', '14:45:00', 22, 35.0, 22, 'Sale', 'Oujda-Angad'),
+    -- Continue with more buses and their schedules
+    ('2024-01-11', '09:00:00', '13:00:00', 28, 55.0, 6, 'Casablanca', 'Meknès'),
+    ('2024-01-12', '11:00:00', '15:00:00', 20, 40.0, 33,'Rabat', 'Tangier'),
+    -- Continue with more buses and their schedules
+      ('2024-01-13', '08:30:00', '12:30:00', 30, 50.0, 22, 'Fès', 'Kenitra'),
+    ('2024-01-14', '10:30:00', '14:30:00', 25, 45.0, 7, 'Meknès', 'Oujda-Angad'),
+    -- Schedule for bus number 8
+    ('2024-01-15', '09:00:00', '13:00:00', 28, 55.0, 30, 'Sale', 'Marrakech'),
+    ('2024-01-16', '11:00:00', '15:00:00', 20, 40.0, 8, 'Sale', 'Fès'),
+    -- Continue with more buses and their schedules
+    ('2024-01-05', '08:45:00', '12:45:00', 32, 60.0, 40, 'Sale', 'Rabat'),
+    ('2024-01-18', '10:45:00', '14:45:00', 22, 35.0, 9, 'Rabat', 'Oujda-Angad'),
+    -- Continue with more buses and their schedules
+    ('2024-01-19', '09:00:00', '13:00:00', 28, 55.0, 10,'Casablanca', 'Marrakech'),
+    ('2024-01-02', '11:00:00', '15:00:00', 20, 40.0, 10, 'Fès', 'Tangier'),
+    -- Continue with more buses and their schedules
+    ('2024-01-14', '08:30:00', '12:30:00', 30, 50.0, 11, 'Tangier', 'Marrakech'),
+    ('2024-01-15', '10:30:00', '14:30:00', 25, 45.0, 11, 'Marrakech', 'Sale'),
+     ('2024-01-05', '09:00:00', '13:00:00', 28, 55.0, 12, 'Sale', 'Rabat'),
+    ('2024-01-24', '11:00:00', '15:00:00', 20, 40.0, 12, 'Rabat', 'Meknès'),
+    -- Continue with more buses and their schedules
+    ('2024-01-01', '08:45:00', '12:45:00', 32, 60.0, 13, 'Casablanca', 'Fès'),
+    ('2024-01-02', '10:45:00', '14:45:00', 22, 35.0, 13, 'Fès', 'Tangier'),
+    -- Continue with more buses and their schedules
+    ('2024-01-14', '09:00:00', '13:00:00', 28, 55.0, 14, 'Tangier', 'Marrakech'),
+    ('2024-01-15', '11:00:00', '15:00:00', 20, 40.0, 14, 'Marrakech', 'Sale'),
+    -- Continue with more buses and their schedules
+    ('2024-01-05', '08:30:00', '12:30:00', 30, 50.0, 15, 'Sale', 'Rabat'),
+    ('2024-01-30', '10:30:00', '14:30:00', 25, 45.0, 15, 'Rabat', 'Meknès'),
+    -- Continue with more buses and their sch
+    ('2024-01-31', '08:00:00', '12:00:00', 30, 50.0, 16, 'Casablanca', 'Fès'),
+    ('2024-02-02', '10:00:00', '14:00:00', 25, 45.0, 16, 'Fès', 'Tangier'),
+    -- Schedule for bus number 17
+    ('2024-02-14', '09:00:00', '13:00:00', 28, 55.0, 17, 'Tangier', 'Marrakech'),
+    ('2024-02-15', '11:00:00', '15:00:00', 20, 40.0, 17, 'Marrakech', 'Sale'),
+    -- Continue with more buses and their schedules
+    ('2024-02-05', '08:30:00', '12:30:00', 32, 60.0, 18, 'Sale', 'Rabat'),
+    ('2024-02-05', '10:30:00', '14:30:00', 22, 35.0, 18, 'Rabat', 'Meknès'),
+    -- Continue with more buses and their schedules
+    ('2024-02-01', '09:00:00', '13:00:00', 28, 55.0, 19, 'Casablanca', 'Fès'),
+    ('2024-02-02', '11:00:00', '15:00:00', 20, 40.0, 19, 'Fès', 'Tangier'),
+    -- Continue with more buses and their schedules
+    ('2024-02-14', '08:30:00', '12:30:00', 30, 50.0, 20, 'Tangier', 'Marrakech'),
+    ('2024-02-15', '10:30:00', '14:30:00', 25, 45.0, 20, 'Marrakech', 'Sale'),
+    -- Continue with more buses and their schedules
+    ('2024-02-05', '09:00:00', '13:00:00', 28, 55.0, 21, 'Sale', 'Rabat'),
+    ('2024-02-11', '11:00:00', '15:00:00', 20, 40.0, 21, 'Rabat', 'Meknès'),
+    -- Continue with more buses and their schedules
+    ('2024-02-01', '08:45:00', '12:45:00', 32, 60.0, 22, 'Casablanca', 'Fès'),
+    ('2024-02-02', '10:45:00', '14:45:00', 22, 35.0, 22, 'Fès', 'Tangier'),
+    -- Continue with more buses and their schedules
+    ('2024-02-14', '09:00:00', '13:00:00', 28, 55.0, 23, 'Tangier', 'Marrakech'),
+    ('2024-02-15', '11:00:00', '15:00:00', 20, 40.0, 23, 'Marrakech', 'Sale');
+    -- Continue with more buses and their schedules

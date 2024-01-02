@@ -90,32 +90,36 @@ switch ($action) {
                                         $controler_rout->indexRout();
                                         break;
                            
-                                    case 'serch':
-                                        $departureCity = isset($_GET['departureCity']) ? $_GET['departureCity'] : null;
-                                        $arrivalCity = isset($_GET['arrivalCity']) ? $_GET['arrivalCity'] : null;
-                                        $travelDate = isset($_GET['date_trip']) ? $_GET['date_trip'] : null;
-                                        $numPeople = isset($_GET['num_papl']) ? $_GET['num_papl'] : null;
+                                    case 'search':
+                                        extract($_POST); 
+                                           session_start();
+                                           
+                                            $_SESSION['departcity']=$departureCity;
+                                            $_SESSION['arivcity']=$arrivalCity;
+                                            $_SESSION['date']=$date_trip;
+                                            $_SESSION['num_papl']=$num_papl;
+
+                                           
                                         
-                                            
                                         require_once 'Controller\scheduel_control.php';
                                         $controler_sched = new Controler_schet();
-                                        $controler_sched->get_scheduel_serch($departureCity,$arrivalCity,$travelDate,$numPeople);
-                                            
-
+                                        $controler_sched->get_scheduel_serch($departureCity,$arrivalCity,$date_trip,$num_papl);
+                                  
+                                        
                                        
                                         break;
                                         case'filter':
-                                            $departureCity = isset($_GET['starcity']) ? $_GET['starcity'] : null;
-                                            $arrivalCity = isset($_GET['endcity']) ? $_GET['endcity'] : null;
-                                            $travelDate = isset($_GET['date']) ? $_GET['date'] : null;
-                                            $numPeople = isset($_GET['num_prpl']) ? $_GET['num_prpl'] : null;
-                                            $priceFilter = isset($_GET['by_price']) ? true : false;
-                                            $busNameFilter = isset($_GET['bus_name']) ? $_GET['bus_name'] : null;
-                                            $companyNameFilter = isset($_GET['company_name']) ? $_GET['company_name'] : null;
-                                            require_once 'Controller\scheduel_control.php';
-                                            $controler_sched = new Controler_schet();
-                                            $controler_sched->get_scheduel_filred($departureCity,$arrivalCity,$travelDate,$numPeople,$priceFilter,$busNameFilter,$companyNameFilter);
-                                            break;
+                                            session_start();
+                                            $departureCity=   $_SESSION['departcity'];
+                                            $arrivalCity=   $_SESSION['arivcity'];
+                                            $date_trip= $_SESSION['date'];
+                                            $num_papl=  $_SESSION['num_papl'];
+                                         
+                                          require_once 'Controller\scheduel_control.php';
+                                      
+                                          $controler_sched = new Controler_schet();
+                                          $controler_sched->get_scheduel_filred($departureCity,$arrivalCity,$date_trip,$num_papl);
+                                          break;
                                
     
 

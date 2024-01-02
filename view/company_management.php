@@ -22,8 +22,9 @@
           <td><?= $comp['id']; ?></td>
           <td><?= $comp['companyname']; ?></td>
           <td><?= $comp['shortname']; ?></td>
-          <td class=" img-fluid "> <img  src=" <?= $comp['img']; ?>" alt="company img"></td>
-       
+          <td class="img-fluid">
+    <img src="view\images\<?= $comp['img'];?>" alt="company img">
+</td>
           <td class="d-flex justify-content-center">
           
                 <a href="index.php?action=modify_company&id=<?= $comp['id']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>

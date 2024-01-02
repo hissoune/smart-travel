@@ -23,6 +23,7 @@ public static function get_comp_select_modify($id) {
     $licenseplate =  $buses['licenseplate'];
     $busnumber =  $buses['capacity'];
     include 'view\modify_bus.php';
+    
 }
 public static function modify_buses($id){
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {

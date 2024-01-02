@@ -15,7 +15,9 @@ public static function get_comp_select() {
   $comp_slct = $comp_select->fetchingcompanys();
   
   include 'view/add_bus.php';
+
   
+ 
 
 
 }

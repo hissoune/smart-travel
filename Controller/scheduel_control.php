@@ -9,23 +9,31 @@ include 'Model\ScheduleDao.php';
           $Schedule= $ScheduleDAO->getAllSchedules();
           include 'view\schedule\schedulesIndex.php';
     }
-    public static function get_scheduel_serch($departureCity,$arrivalCity,$travelDate,$numPeople){
-            
+    public static function get_scheduel_serch($departureCity,$arrivalCity,$date_trip,$num_papl){
+ 
+      
 
             $ScheduleDAO = new ScheduleDAO();
-            $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDate($departureCity,$arrivalCity,$travelDate,$numPeople);
+            $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDate($departureCity,$arrivalCity,$date_trip,$num_papl);
+            
             require_once 'view\serch.php';
+            
+
        
     
     
     }
 
 
-    public static function get_scheduel_filred($departureCity,$arrivalCity,$travelDate,$numPeople,$priceFilter,$busNameFilter,$companyNameFilter){
-            
+    public static function get_scheduel_filred($departureCity,$arrivalCity,$date_trip,$num_papl){
+     
+  
+      
+      extract($_GET)  ;
+    
 
         $ScheduleDAO = new ScheduleDAO();
-        $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter($departureCity,$arrivalCity,$travelDate,$numPeople,$priceFilter,$busNameFilter,$companyNameFilter);
+        $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter($departureCity,$arrivalCity,$date_trip,$num_papl,$by_price,$bus_name,$company_name);
         require_once 'view\serch.php';
    
 

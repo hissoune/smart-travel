@@ -15,12 +15,16 @@ class ScheduleDAO {
         $query = "SELECT * FROM Schedule";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
         // SELECT * FROM Schedule where startcity= '' and endcity= '' and availableseats>= 22;
     }
 
     public function getSchedulesByCitiesAndDate($departureCity, $arrivalCity ,$travelDate, $numberof_peapl)
-    {
-        $query = "SELECT Schedule.* ,Bus.licenseplate ,Bus.companyname  FROM Schedule join Bus on Schedule.bus_id = Bus.id     where startcity= '$departureCity' and endcity= '$arrivalCity' and availableseats>= $numberof_peapl and date='$travelDate' ";
+    
+    
+    {       
+
+        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname , company.img FROM Schedule JOIN Bus ON Schedule.bus_id = Bus.id JOIN Company ON Bus.comp_id = company.id  where startcity= '$departureCity' and endcity= '$arrivalCity' and availableseats>= $numberof_peapl and date='$travelDate' ";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -29,15 +33,13 @@ class ScheduleDAO {
 
     public function getSchedulesByCitiesAndDateandfilter($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter, $busNameFilter, $companyNameFilter)
     {
-        $query = "SELECT Schedule.*, Bus.licenseplate, Bus.companyname  
-                  FROM Schedule 
-                  JOIN Bus ON Schedule.bus_id = Bus.id
+        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule JOIN Bus ON Schedule.bus_id = Bus.id JOIN Company ON Bus.comp_id = company.id
                   WHERE startcity = :departureCity 
                         AND endcity = :arrivalCity 
                         AND availableseats >= :numPeople 
                         AND date = :travelDate 
                         AND Bus.licenseplate = :busNameFilter 
-                        AND Bus.companyname = :companyNameFilter";
+                        AND company.companyname = :companyNameFilter";
     
         // Add the condition for ordering by price if $priceFilter is true
         if ($priceFilter) {
