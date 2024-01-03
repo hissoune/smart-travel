@@ -103,24 +103,32 @@ switch ($action) {
                                         
                                         require_once 'Controller\scheduel_control.php';
                                         $controler_sched = new Controler_schet();
-                                        $controler_sched->get_scheduel_serch($departureCity,$arrivalCity,$date_trip,$num_papl);
-                                  
                                         
-                                       
+                                        $controler_sched->get_scheduel_serch($departureCity,$arrivalCity,$date_trip,$num_papl);
+                                        
+                                        
                                         break;
+                                        case 'get_filter':
+                                            require_once 'Controller\scheduel_control.php';
+
+                                            $controler_sched = new Controler_schet();
+                                            $controler_sched->get_comp_select();
+                                            break;
                                         case'filter':
                                             session_start();
                                             $departureCity=   $_SESSION['departcity'];
                                             $arrivalCity=   $_SESSION['arivcity'];
                                             $date_trip= $_SESSION['date'];
                                             $num_papl=  $_SESSION['num_papl'];
-                                         
+                                           
                                           require_once 'Controller\scheduel_control.php';
                                       
                                           $controler_sched = new Controler_schet();
                                           $controler_sched->get_scheduel_filred($departureCity,$arrivalCity,$date_trip,$num_papl);
                                           break;
-                               
+                                 case 'add_scheduel':
+                                      include 'view\schedule\add.php';
+                                    break;
     
 
     // Add more cases as needed

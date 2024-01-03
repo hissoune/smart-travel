@@ -1,6 +1,8 @@
 <?php 
 
 include 'Model\ScheduleDao.php';
+include 'Model\companyDAO.php';
+
 
   class Controler_schet{
    
@@ -9,16 +11,21 @@ include 'Model\ScheduleDao.php';
           $Schedule= $ScheduleDAO->getAllSchedules();
           include 'view\schedule\schedulesIndex.php';
     }
+    public static function get_comp_select() {
+        $comp_select = new CompanyDAO();
+        $comp_slct = $comp_select->fetchingcompanys();
+        include 'view\form_serach.php';
+      }
     public static function get_scheduel_serch($departureCity,$arrivalCity,$date_trip,$num_papl){
  
-      
+        
 
             $ScheduleDAO = new ScheduleDAO();
             $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDate($departureCity,$arrivalCity,$date_trip,$num_papl);
             
-            require_once 'view\serch.php';
+            include 'view\serch.php';
             
-
+           
        
     
     
@@ -29,7 +36,7 @@ include 'Model\ScheduleDao.php';
      
   
       
-      extract($_GET)  ;
+        extract($_GET)  ;
     
 
         $ScheduleDAO = new ScheduleDAO();

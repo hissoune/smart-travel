@@ -1,40 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'view\head.php'; ?>
+<?php include 'view\nav.php'; ?>
+<div class="container mt-5">
+    <h2 class="mb-4">Schedule Insert Form</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Schedule</title>
-</head>
+    <form action="insert_schedule.php" method="POST">
+        <div class="mb-3">
+            <label for="date" class="form-label">Date:</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
 
-<body>
-    <h1>Add New Schedule</h1>
+        <div class="mb-3">
+            <label for="departuretime" class="form-label">Departure Time:</label>
+            <input type="time" class="form-control" id="departuretime" name="departuretime" required>
+        </div>
 
-    <form action="index.php" method="post">
-        <label for="date">Date:</label>
-        <input type="text" id="date" name="date" required>
+        <div class="mb-3">
+            <label for="arrivaltime" class="form-label">Arrival Time:</label>
+            <input type="time" class="form-control" id="arrivaltime" name="arrivaltime" required>
+        </div>
 
-        <br>
+        <div class="mb-3">
+            <label for="availableseats" class="form-label">Available Seats:</label>
+            <input type="number" class="form-control" id="availableseats" name="availableseats" required>
+        </div>
 
-        <label for="departureTime">Departure Time:</label>
-        <input type="text" id="departureTime" name="departureTime" required>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+        </div>
 
-        <br>
+        <div class="mb-3">
+    <label for="bus_id" class="form-label">Bus name:</label>
+    <select class="form-select" id="bus_id" name="bus_id" required>
+        
+        <option value="" selected disabled>Select Bus</option>
 
-        <label for="arrivalTime">Arrival Time:</label>
-        <input type="text" id="arrivalTime" name="arrivalTime" required>
+        
+        <?php
+        foreach ($busList as $bus) {
+            echo '<option value="' . $bus['id'] . '">' . $bus['bus_name'] . '</option>';
+        }
+        ?>
+    </select>
+</div>
 
-        <br>
 
-        <label for="availableSeats">Available Seats:</label>
-        <input type="text" id="availableSeats" name="availableSeats" required>
+        <div class="mb-3">
+            <label for="startcity" class="form-label">Start City:</label>
+            <input type="text" class="form-control" id="startcity" name="startcity" required>
+        </div>
 
-        <br>
+        <div class="mb-3">
+            <label for="endcity" class="form-label">End City:</label>
+            <input type="text" class="form-control" id="endcity" name="endcity" required>
+        </div>
 
-        <label for="busID">Bus ID:</label>
-        <input type="text" id="busID" name="busID" required>
-
-        <br>
-
-        <label for="routeID">Route ID:</label>
-        <input type="text" id="routeID" name="routeID" required>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

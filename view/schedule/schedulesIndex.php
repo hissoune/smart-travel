@@ -4,7 +4,7 @@
 
 <section>
          <div class="container shadow ">
-         <a href="index.php?action=add_company"  class="btn btn-outline-light btn-success text-light mt-2">add</a>
+         <a href="index.php?action=add_scheduel"  class="btn btn-outline-light btn-success text-light mt-2">add</a>
 
        <table class="table-bordered w-100 mt-3 mb-3 ">
         <thead>
@@ -46,5 +46,6 @@
             <?php  } ?>
         </tbody>
        </table>
+
        </div>
 </section>

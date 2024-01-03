@@ -33,12 +33,14 @@ class ScheduleDAO {
 
     public function getSchedulesByCitiesAndDateandfilter($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter, $busNameFilter, $companyNameFilter)
     {
-        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule JOIN Bus ON Schedule.bus_id = Bus.id JOIN Company ON Bus.comp_id = company.id
+        // Base query
+        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule 
+                  JOIN Bus ON Schedule.bus_id = Bus.id 
+                  JOIN Company ON Bus.comp_id = company.id
                   WHERE startcity = :departureCity 
                         AND endcity = :arrivalCity 
                         AND availableseats >= :numPeople 
                         AND date = :travelDate 
-                        AND Bus.licenseplate = :busNameFilter 
                         AND company.companyname = :companyNameFilter";
     
         // Add the condition for ordering by price if $priceFilter is true
@@ -46,14 +48,24 @@ class ScheduleDAO {
             $query .= " ORDER BY price ASC";
         }
     
+        // Add the condition for filtering by bus name if $busNameFilter is not empty
+        if (!empty($busNameFilter)) {
+            $query .= " AND Bus.licenseplate = :busNameFilter";
+        }
+    
+        // Prepare and execute the query
         $params = [
             ':departureCity' => $departureCity,
             ':arrivalCity' => $arrivalCity,
             ':numPeople' => $numPeople,
             ':travelDate' => $travelDate,
-            ':busNameFilter' => $busNameFilter,
             ':companyNameFilter' => $companyNameFilter,
         ];
+    
+        // Add the parameter for bus name if $busNameFilter is not empty
+        if (!empty($busNameFilter)) {
+            $params[':busNameFilter'] = $busNameFilter;
+        }
     
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
@@ -62,9 +74,6 @@ class ScheduleDAO {
         return $result;
     }
     
-
-
-
 
     public function addSchedule($schedule) {
         $query = "INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, busnumber, startcity, endcity) 
