@@ -1,12 +1,12 @@
 <?php include 'view\head.php'; ?>
 <?php include 'view\nav.php'; ?>
-<div class="container mt-5">
-    <h2 class="mb-4">Schedule Insert Form</h2>
+<div class="container   bg-success-subtle p-4">
+    <h2 class="mb-4 fs-2 text-center"><strong>add your schedueles</strong> </h2>
 
-    <form action="insert_schedule.php" method="POST">
+    <form action="index.php?action=insert_schet" method="POST">
         <div class="mb-3">
             <label for="date" class="form-label">Date:</label>
-            <input type="date" class="form-control" id="date" name="date" required>
+            <input type="date" class="form-control" id="date" name="date_schet" required>
         </div>
 
         <div class="mb-3">
@@ -37,8 +37,9 @@
 
         
         <?php
-        foreach ($busList as $bus) {
-            echo '<option value="' . $bus['id'] . '">' . $bus['bus_name'] . '</option>';
+        foreach ($bus_name as $bus) {
+            
+            echo '<option value="' . $bus['id'] . '">' . $bus['licenseplate'] . '</option>';
         }
         ?>
     </select>
@@ -46,15 +47,20 @@
 
 
         <div class="mb-3">
-            <label for="startcity" class="form-label">Start City:</label>
-            <input type="text" class="form-control" id="startcity" name="startcity" required>
-        </div>
+            <label for="startcity" class="form-label">Start root:</label>
+            <select class="form-select" id="bus_id" name="bus_id" required>
+        
+        <option value="" selected disabled>Select city</option>
 
-        <div class="mb-3">
-            <label for="endcity" class="form-label">End City:</label>
-            <input type="text" class="form-control" id="endcity" name="endcity" required>
-        </div>
+        
+        <?php
+        foreach ($routes as $select) {
+            echo '<option value="' . $select->getStartcity() . '-' . $select->getStartcity() . '">' . $select->getStartcity() . ' to ' . $select->getStartcity() . '</option>';
+        }
+        ?>
+    </select>        </div>
 
+       
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

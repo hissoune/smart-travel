@@ -12,9 +12,17 @@ class RoadDao {
     public function getAllRoads() {
         $query = "SELECT * FROM Road";
         $stmt = $this->db->query($query);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        $results = $stmt->fetchAll();
+    
+        $roads = [];
+        foreach ($results as $result) {
+            // Assuming columns in the database match the constructor parameters of Road class
+            $road = new Road($result['distance'], $result['duration'], $result['startcity'], $result['endcity']);
+            $roads[] = $road;
+        }
+        return $roads;
     }
+    
 
     public function addRoad($road) {
         $query = "INSERT INTO Road (distance, duration, start_city, end_city) 

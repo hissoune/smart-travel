@@ -11,6 +11,27 @@ class ScheduleDAO {
         $this->db = DatabaseConnection::getInstance()->getConnection();
     } 
 
+    public function get_comp_bus_names(){
+
+        $query = "SELECT  Bus.licenseplate,Bus.id ,company.companyname FROM Schedule JOIN Bus ON Schedule.bus_id = Bus.id JOIN Company ON Bus.comp_id = company.id  group by companyname";
+        $stmt = $this->db->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function get_citys_from_route(){
+
+        $query = " SELECT Road.startcity, Road.endcity
+    
+        
+         FROM Schedule
+         JOIN Road ON Schedule.startcity = Road.startcity AND Schedule.endcity = Road.endcity
+         GROUP BY Road.startcity, Road.endcity";
+        $stmt = $this->db->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getAllSchedules() {
         $query = "SELECT * FROM Schedule";
         $stmt = $this->db->query($query);
@@ -31,7 +52,7 @@ class ScheduleDAO {
 
     }
 
-    public function getSchedulesByCitiesAndDateandfilter($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter, $busNameFilter, $companyNameFilter)
+    public function getSchedulesByCitiesAndDateandfilter($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter,  $companyNameFilter)
     {
         // Base query
         $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule 
@@ -42,16 +63,14 @@ class ScheduleDAO {
                         AND availableseats >= :numPeople 
                         AND date = :travelDate 
                         AND company.companyname = :companyNameFilter";
-    
+                
         // Add the condition for ordering by price if $priceFilter is true
         if ($priceFilter) {
             $query .= " ORDER BY price ASC";
         }
     
         // Add the condition for filtering by bus name if $busNameFilter is not empty
-        if (!empty($busNameFilter)) {
-            $query .= " AND Bus.licenseplate = :busNameFilter";
-        }
+        
     
         // Prepare and execute the query
         $params = [
@@ -60,12 +79,11 @@ class ScheduleDAO {
             ':numPeople' => $numPeople,
             ':travelDate' => $travelDate,
             ':companyNameFilter' => $companyNameFilter,
+            
         ];
     
         // Add the parameter for bus name if $busNameFilter is not empty
-        if (!empty($busNameFilter)) {
-            $params[':busNameFilter'] = $busNameFilter;
-        }
+        
     
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);

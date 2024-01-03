@@ -19,10 +19,10 @@
         <tbody>
         <?php foreach ($routes as $route) : ?>
           <tr>
-          <td><?= $route['distance']; ?></td>
-          <td><?= $route['duration']; ?></td>
-          <td><?= $route['startcity']; ?></td>
-          <td><?= $route['endcity']; ?></td>
+          <td><?php echo $route->getDistance(); ?></td>
+          <td><?= $route->getDistance(); ?></td>
+          <td><?= $route->getDistance(); ?></td>
+          <td><?= $route->getDistance(); ?></td>
           
           
        

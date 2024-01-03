@@ -4,7 +4,7 @@
 
 <style>
   body {
-    background-image: url('view/images/banner.jpg');
+    background-image: url('view/images/bus_home.jpg');
     background-size: cover;
     /* Additional styles for clarity */
     margin: 0;
@@ -16,12 +16,15 @@
    font-size: 30px;
   }
   .bfrm{
-   background-color: rgba(255, 215, 0, 0.2);
+   background-color: rgba(255, 230, 10, 0.2);
+  }
+  .serch{
+   margin-left: 100px;
   }
 </style>
 
 <section >
-   <div class="banner-main">
+   <div class="banner-main serch">
       <div class="tiltl ">
       <h1 class=" p-4   w-100   text-white text-center  "><strong>moroco</strong><br><strong
             class="text-warning  text-center">

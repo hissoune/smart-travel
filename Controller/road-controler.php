@@ -10,12 +10,14 @@ class RouteController
     }
 
     public function indexRout()
-    {
-        // Display a list of routes
-        $routes = $this->routeDAO->getAllRoads();
-        // Include your view file (e.g., route/index.php) to display the list
-        include 'view\route\routeIndex.php';
-    }
+{
+    $routeDAO = new RoadDao();
+    // Display a list of routes
+    $routes = $routeDAO->getAllRoads();
+    // Include your view file (e.g., route/index.php) to display the list
+    include 'view\route\routeIndex.php';
+}
+   
 
     public function add()
     {

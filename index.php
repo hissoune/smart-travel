@@ -112,7 +112,8 @@ switch ($action) {
                                             require_once 'Controller\scheduel_control.php';
 
                                             $controler_sched = new Controler_schet();
-                                            $controler_sched->get_comp_select();
+                                            $comp_bus_slct= $controler_sched->get_comp_select();
+                                            include 'view\form_serach.php';
                                             break;
                                         case'filter':
                                             session_start();
@@ -127,7 +128,13 @@ switch ($action) {
                                           $controler_sched->get_scheduel_filred($departureCity,$arrivalCity,$date_trip,$num_papl);
                                           break;
                                  case 'add_scheduel':
-                                      include 'view\schedule\add.php';
+                                    require_once 'Controller\scheduel_control.php';
+                                    $controler_sched = new Controler_schet();
+                                    $route= $controler_sched->get_citys();
+                                    $bus_name= $controler_sched->get_comp_select();
+                                    require_once 'view\schedule\add.php';
+
+                                      
                                     break;
     
 
