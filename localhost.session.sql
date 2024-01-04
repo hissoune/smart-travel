@@ -52,7 +52,7 @@ CREATE TABLE Schedule (
     startcity VARCHAR(255),
     endcity VARCHAR(255), 
     FOREIGN KEY (bus_id) REFERENCES Bus(id),
-    FOREIGN KEY (startcity, endcity) REFERENCES Road(startcity, endcity)
+    FOREIGN KEY (startcity, endcity) REFERENCES Road(startcity, endcity) ON UPDATE CASCADE ON DELETE CASCADE
 
 );
 

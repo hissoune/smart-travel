@@ -15,7 +15,7 @@
                 <div class="ctr d-flex px-5">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=home">Home</a>
+                        <a class="nav-link" href="index.php?action=admin">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?action=bus_management">bus managment</a>

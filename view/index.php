@@ -1,9 +1,9 @@
 <?php include 'head.php'; ?>
-<?php include 'view\nav.php'; ?>
+
 
 
 <style>
-  body {
+  .serchfrm {
     background-image: url('view/images/bus_home.jpg');
     background-size: cover;
     /* Additional styles for clarity */
@@ -23,7 +23,7 @@
   }
 </style>
 
-<section >
+<section class="serchfrm">
    <div class="banner-main serch">
       <div class="tiltl ">
       <h1 class=" p-4   w-100   text-white text-center  "><strong>moroco</strong><br><strong
@@ -88,10 +88,42 @@
          </div>
       </div>
    </div>
+   <div  >
+   <div class="" id="searchResults"></div>
+</div>
 </section>
-<section>
-   <div id="searchResults"></div>
-</section>
+
+<div id="about" class="about container w-75">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage text-center">
+                    <h2 class="fs-3 mb-4 mt-4"><strong>About Our Travel Agency</strong></h2>
+                    <p class="lead">A fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="about-box">
+                        <p class="mb-4">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+                        <p class="mb-4">If you are going to use a passage of Lorem Ipsum, you need to be sure there.</p>
+                        <a href="#" class="btn btn-warning">Read More</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="palne-img-area">
+                        <img src="view/images/046b3884bbd9d16ba053a80c95b8f295.jpg" alt="images" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 

@@ -1,44 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'view\head.php'; ?>
+<?php include 'view\nav.php'; ?>
+<div class="container   bg-success-subtle p-4">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Route</title>
-</head>
 
-<body>
-    <h1>Edit Route</h1>
 
-    <form action="index.php" method="post">
-        <input type="hidden" name="routeID" value="<?= $route->getRouteID(); ?>">
+<!-- $starcity 
+$endcity -->
+    <h2 class="mb-4 fs-2 text-center"><strong>add your routes</strong> </h2>
 
-        <label for="startCityID">Start City ID:</label>
-        <input type="text" id="startCityID" name="startCityID" value="<?= $route->getStartCityID(); ?>" required>
+    <form action="index.php?action=modif_confimed" method="POST">
+        
+    <input type="text" hidden class="form-control" value="<?= $starcitylast;?>" id="" name="startcitylast" required>
+    <input type="text" hidden class="form-control" value="<?= $endcitylast;?>" id="" name="endcitylast" required>
 
-        <br>
 
-        <label for="endCityID">End City ID:</label>
-        <input type="text" id="endCityID" name="endCityID" value="<?= $route->getEndCityID(); ?>" required>
+        <div class="mb-3">
+            <label for="distance" class="form-label">distance:</label>
+            <input type="number" class="form-control" value="<?= $distance;?>" id="distance" name="distance" required>
+        </div>
 
-        <br>
+        <div class="mb-3">
+            <label for="duration" class="form-label">duration:</label>
+            <input type="time" class="form-control" value="<?= $duration;?>"  id="duration" name="duration" required>
+        </div>
 
-        <label for="distance">Distance:</label>
-        <input type="text" id="distance" name="distance" value="<?= $route->getDistance(); ?>" required>
+        
+        <div class="">
+                              <label>start city</label>
 
-        <br>
+                              <select class="form-control" name="departureCity">
 
-        <label for="duration">Duration:</label>
-        <input type="text" id="duration" name="duration" value="<?= $route->getDuration(); ?>" required>
+                                 <?php foreach ($villes as $ville) { ?>
 
-        <br>
+                                    <option>
+                                       <?= $ville['cityname']; ?>
+                                    </option>
+                                 <?php } ?>
+                              </select>
+                           </div>
+                           <div class="mb-3">
+                              <label>end city</label>
+                              <select class="form-control" name="arrivalCity">
 
-        <input type="submit" value="Update Route">
+                                 <?php foreach ($villes as $ville) { ?>
+
+                                    <option>
+                                       <?= $ville['cityname']; ?>
+                                    </option>
+                                 <?php } ?>
+                              </select>
+                           </div>
+        
+        
+
+        
+        <button type="submit" class="btn btn-primary">modify rout</button>
     </form>
-
-    <br>
-
-    <a href="index.php">Back to Route List</a>
-</body>
-
-</html>
+</div>

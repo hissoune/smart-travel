@@ -32,9 +32,10 @@ class ScheduleDAO {
     }
 
     public function getAllSchedules() {
-        $query = "SELECT * FROM Schedule";
+        $query = "SELECT * FROM Schedule  ";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
         return $result;
         // SELECT * FROM Schedule where startcity= '' and endcity= '' and availableseats>= 22;
     }
@@ -42,12 +43,14 @@ class ScheduleDAO {
     public function getSchedulesByCitiesAndDate($departureCity, $arrivalCity ,$travelDate, $numberof_peapl)
     
     
-    {       
+    {      
+        if($departureCity!=$arrivalCity) {
 
         $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname , company.img FROM Schedule JOIN Bus ON Schedule.bus_id = Bus.id JOIN Company ON Bus.comp_id = company.id  where startcity= '$departureCity' and endcity= '$arrivalCity' and availableseats>= $numberof_peapl and date='$travelDate' ";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }else return $result=[];
 
     }
 

@@ -19,34 +19,52 @@ class RoadDao {
         $query = "INSERT INTO Road (distance, duration, startcity, endcity) 
                   VALUES (:distance, :duration, :start_city, :end_city)";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':distance', $route->getDistance());
-        $stmt->bindParam(':duration', $route->getDuration());
-        $stmt->bindParam(':start_city', $route->getStartCity());
-        $stmt->bindParam(':end_city', $route->getEndCity());
+           $distance=$route->getDistance();
+           $duration=$route->getDuration();
+           $start_city=$route->getStartCity();
+           $end_city=$route->getEndCity();
+
+
+        $stmt->bindParam(':distance',$distance );
+        $stmt->bindParam(':duration',$duration );
+        $stmt->bindParam(':start_city', $start_city);
+        $stmt->bindParam(':end_city', $end_city);
         $stmt->execute();
     }
-    
-
-    public function updateRoad($road, $id) {
+    public function get_rout_by($starcitylast, $endcitylast)
+{
+    $query = "SELECT * FROM Road where startcity= '$starcitylast' and endcity='$endcitylast'";
+    $stmt = $this->db->query($query);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+    public function updateRoad($road, $startcitylast,$endcitylast) {
         $query = "UPDATE Road 
                   SET distance = :distance, 
-                      duration = :duration, 
-                      start_city = :start_city, 
-                      end_city = :end_city 
-                  WHERE road_id = :id";
+                  duration = :duration, 
+                  startcity = :start_city, 
+                  endcity = :end_city 
+                  WHERE startcity  = :startcitylast and endcity  = :endcitylast ";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':distance', $road->getDistance());
-        $stmt->bindParam(':duration', $road->getDuration());
-        $stmt->bindParam(':start_city', $road->getStartCity());
-        $stmt->bindParam(':end_city', $road->getEndCity());
-        $stmt->bindParam(':id', $id);
+        $distance=$road->getDistance();
+        $duration=$road->getDuration();
+        $start_city=$road->getStartCity();
+        $end_city=$road->getEndCity();
+
+        $stmt->bindParam(':distance',  $distance);
+        $stmt->bindParam(':duration', $duration);
+        $stmt->bindParam(':start_city', $start_city);
+        $stmt->bindParam(':end_city', $end_city);
+        $stmt->bindParam(':startcitylast', $startcitylast);
+        $stmt->bindParam(':endcitylast', $endcitylast);
         $stmt->execute();
     }
 
-    public function deleteRoad($id) {
-        $query = "DELETE FROM Road WHERE road_id = :id";
+    public function delet_Rout($starcitylast,$endcitylast) {
+        $query = "DELETE FROM Road WHERE startcity = :start_city and endcity = :end_city";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':start_city', $starcitylast);
+        $stmt->bindParam(':end_city', $endcitylast);
         $stmt->execute();
     }
 }

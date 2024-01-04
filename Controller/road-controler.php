@@ -22,6 +22,13 @@ class RouteController
 
         }
 
+        public static function getcitys_modif(){
+              
+            $ville = new cityDAO();
+            $villes= $ville->get_citys();
+            return $villes;
+     }
+
     public function insert_rout()
     {
         extract($_POST);
@@ -32,44 +39,39 @@ class RouteController
             $routeDAO->addRoad($route);
 
             // Redirect to the index page or show a success message
-            header('Location: index.php');
+            header('location:index.php?action=route_management');
             exit();
        
     }
 
-    public function edit($routeID)
+    public function edit($startcity,$endcity)
     {
-        // Handle the editing of an existing route
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Validate and process the form data
-            $startCityID = $_POST['startCityID'];
-            $endCityID = $_POST['endCityID'];
-            $distance = $_POST['distance'];
-            $duration = $_POST['duration'];
+        extract($_POST); 
 
-            // Create a Route object
-            $route = new Route($routeID, $startCityID, $endCityID, $distance, $duration);
+        
+            $route = new Route($distance,$duration, $departureCity, $arrivalCity);
 
-            // Update the route in the database
-            $this->routeDAO->updateRoute($route);
+            $routeDAO = new RoadDao();
+            $routeDAO->updateRoad($route, $startcitylast,$endcitylast);
 
             // Redirect to the index page or show a success message
-            header('Location: index.php');
+            header('location:index.php?action=route_management');
             exit();
-        } else {
-            // Display the form to edit an existing route
-            $route = $this->routeDAO->getRouteById($routeID);
-            // Include your view file (e.g., route/edit.php)
-            include '../view/route/edit.php';
-        }
+       
     }
 
-    public function delete($routeID)
+    public static function get_rout($starcitylast, $endcitylast){
+            $routeDAO = new RoadDao();
+            $route=$routeDAO->get_rout_by($starcitylast, $endcitylast);
+            return $route;
+    }
+
+    public function delet_rout($starcitylast,$endcitylast)
     {
-        // Handle the deletion of an existing route
-        $this->routeDAO->deleteRoute($routeID);
-        // Redirect to the index page or show a success message
-        header('Location: index.php');
+        $routeDAO = new RoadDao();
+        $routeDAO-> delet_Rout($starcitylast,$endcitylast);
+       
+        header('location:index.php?action=route_management');
         exit();
     }
 }

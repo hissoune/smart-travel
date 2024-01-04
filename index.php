@@ -8,11 +8,10 @@ if (isset($_GET['action']) ) {
 
 
 switch ($action) {
-    case 'home':
-        require_once 'Controller\controler_ville.php';
-        $controlerville = new Controler_ville();
-        $controlerville->get_ville_ville();
-        break;
+    case 'admin':
+        require_once 'Controller\buscontroler\buscontroler.php';
+        $controlerbus = new Controler_bus();
+        $controlerbus->get_buses();
     
     case 'bus_management':
         require_once 'Controller\buscontroler\buscontroler.php';
@@ -97,16 +96,40 @@ switch ($action) {
                                     $controler_rout->insert_rout();
 
                                     break;
-
-
-
-
-
-                                    case 'delet_rout':
+                                    case 'modify_rout':
+                                        $starcitylast = $_GET['startcity'];
+                                        $endcitylast = $_GET['endcity'];
                                         require_once 'Controller\road-controler.php';
                                         $controler_rout = new RouteController();
-                                        $controler_rout->indexRout();
+                                        $route=$controler_rout->get_rout($starcitylast,$endcitylast);
+                                        $distance = $route['distance'];
+                                        $duration = $route['duration'];
+                                        $starcity = $route['startcity'];
+                                        $endcity = $route['endcity'];
+                                        $villes= $controler_rout->getcitys_modif();
+                                        require_once 'view\route\edit.php';
+
                                         break;
+                                        case'modif_confimed':
+                                            extract($_POST); 
+                                            require_once 'Controller\road-controler.php';
+                                        $controler_rout = new RouteController();
+                                        echo $endcitylast;
+                                        $controler_rout->edit($startcitylast,$endcitylast);
+                                     break;
+                                     case 'delet_rout':
+                                        $starcitylast = $_GET['startcity'];
+                                        $endcitylast = $_GET['endcity'];
+                                        require_once 'Controller\road-controler.php';
+                                        $controler_rout = new RouteController();
+                                        $controler_rout->delet_rout($starcitylast,$endcitylast);
+                                        break;
+
+
+
+
+
+                                    
                            
                                     case 'search':
                                         extract($_POST); 

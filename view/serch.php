@@ -1,3 +1,11 @@
+
+<style>
+
+    .contserched{
+        background-color: rgba(255, 230, 200, 0.3);
+     }
+</style>
+
 <?php
 
 
@@ -11,9 +19,11 @@
          <form action="index.php?action=get_filter" id="get_filter" method="GET">
             <button type="submit" class="btn btn-warning">filter</button>
          </form>
-         <div id="get_form"></div>
+         <div id="get_form"> </div>
+            
 
-       <div class=" row mt-5 ">
+       <div class=" row mt-5 contserched ">
+       <h1 class="text-center  fs-2 text-warning shadow">RESULTAS DE SEARCH</h1>
       <?php  foreach ($schedueles as $schedule) { ?>
        
     
@@ -40,15 +50,25 @@
         </div>
            
           
-          </div>
-   </section>
+         
+          
+   
 
-   <?php } else {
-        echo "No schedules found for the specified criteria.";
-    }
+   <?php } else {?>
+    <div class="container mb-5">
+  <div class="alert alert-warning" role="alert">
+    No schedules found for the specified criteria.
+  </div>
+</div>
+        <?php }
 
 
          ?>
+         </div>
+
+        
+         </section>
+        
          <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     

@@ -28,8 +28,8 @@
        
           <td class="d-flex justify-content-center">
           
-                <a href="index.php?action=modify_rout&id=<?= $route['startcity']; $route['startcity']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delet_rout&id=<?= $route['startcity']; $route['startcity']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
+                <a href="index.php?action=modify_rout&startcity=<?= $route['startcity']?>&endcity=<?=$route['endcity'] ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
+                <a href="index.php?action=delet_rout&startcity=<?= $route['startcity']?>&endcity=<?=$route['endcity'] ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 
