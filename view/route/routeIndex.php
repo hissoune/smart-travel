@@ -4,7 +4,7 @@
 
 <section>
          <div class="container shadow ">
-         <a href="index.php?action=add_company"  class="btn btn-outline-light btn-success text-light mt-2">add</a>
+         <a href="index.php?action=add_root"  class="btn btn-outline-light btn-success text-light mt-2">add</a>
 
        <table class="table-bordered w-100 mt-3 mb-3 ">
         <thead>
@@ -19,10 +19,10 @@
         <tbody>
         <?php foreach ($routes as $route) : ?>
           <tr>
-          <td><?php echo $route->getDistance(); ?></td>
-          <td><?= $route->getDistance(); ?></td>
-          <td><?= $route->getDistance(); ?></td>
-          <td><?= $route->getDistance(); ?></td>
+          <td><?= $route['distance']; ?></td>
+          <td><?= $route['duration']; ?></td>
+          <td><?= $route['startcity']; ?></td>
+          <td><?= $route['endcity']; ?></td>
           
           
        

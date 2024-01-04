@@ -1,48 +1,36 @@
-<?php
-Class Road {
+
+
+<?php 
+
+
+class Route {
     private $distance;
     private $duration;
-    private $startcity;
-    private $endcity;
+    private $startCity;
+    private $endCity;
 
-public function __construct($distance,$duration,$startcity,$endcity){
-    $this->distance = $distance;
-    $this->duration = $duration;
-    $this->startcity = $startcity;
-    $this->endcity = $endcity;
-}
+    public function __construct($distance, $duration, $startCity, $endCity) {
+        $this->distance = $distance;
+        $this->duration = $duration;
+        $this->startCity = $startCity;
+        $this->endCity = $endCity;
+    }
 
-
-    /**
-     * Get the value of distance
-     */ 
-    public function getDistance()
-    {
+    // Getter methods for distance, duration, startCity, and endCity
+    public function getDistance() {
         return $this->distance;
     }
 
-    /**
-     * Get the value of duration
-     */ 
-    public function getDuration()
-    {
+    public function getDuration() {
         return $this->duration;
     }
 
-    /**
-     * Get the value of startcity
-     */ 
-    public function getStartcity()
-    {
-        return $this->startcity;
+    public function getStartCity() {
+        return $this->startCity;
     }
 
-    /**
-     * Get the value of endcity
-     */ 
-    public function getEndcity()
-    {
-        return $this->endcity;
+    public function getEndCity() {
+        return $this->endCity;
     }
 }
-?>
+

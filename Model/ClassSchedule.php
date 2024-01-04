@@ -9,18 +9,18 @@ class Schedule {
     private $arrivalTime;
     private $availableSeats;
     private $price;
-    private $busNumber;
+    private $bus_id;
     private $startCity;
     private $endCity;
 
-    public function __construct($id, $date, $departureTime, $arrivalTime, $availableSeats, $price, $busNumber, $startCity, $endCity) {
-        $this->id = $id;
+    public function __construct( $date, $departureTime, $arrivalTime, $availableSeats, $price, $bus_id, $startCity, $endCity) {
+        
         $this->date = $date;
         $this->departureTime = $departureTime;
         $this->arrivalTime = $arrivalTime;
         $this->availableSeats = $availableSeats;
         $this->price = $price;
-        $this->busNumber = $busNumber;
+        $this->bus_id = $bus_id;
         $this->startCity = $startCity;
         $this->endCity = $endCity;
     }
@@ -49,8 +49,8 @@ class Schedule {
         return $this->price;
     }
 
-    public function getBusNumber() {
-        return $this->busNumber;
+    public function getBus_id() {
+        return $this->bus_id;
     }
 
     public function getStartCity() {

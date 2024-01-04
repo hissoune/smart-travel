@@ -1,5 +1,4 @@
 <?php
-require_once 'config\Connection.php';
 require_once 'Model\ClassRoad.php';
 
 class RoadDao {
@@ -12,28 +11,21 @@ class RoadDao {
     public function getAllRoads() {
         $query = "SELECT * FROM Road";
         $stmt = $this->db->query($query);
-        $results = $stmt->fetchAll();
-    
-        $roads = [];
-        foreach ($results as $result) {
-            // Assuming columns in the database match the constructor parameters of Road class
-            $road = new Road($result['distance'], $result['duration'], $result['startcity'], $result['endcity']);
-            $roads[] = $road;
-        }
-        return $roads;
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
     
-
-    public function addRoad($road) {
-        $query = "INSERT INTO Road (distance, duration, start_city, end_city) 
+    public function addRoad($route) {
+        $query = "INSERT INTO Road (distance, duration, startcity, endcity) 
                   VALUES (:distance, :duration, :start_city, :end_city)";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':distance', $road->getDistance());
-        $stmt->bindParam(':duration', $road->getDuration());
-        $stmt->bindParam(':start_city', $road->getStartCity());
-        $stmt->bindParam(':end_city', $road->getEndCity());
+        $stmt->bindParam(':distance', $route->getDistance());
+        $stmt->bindParam(':duration', $route->getDuration());
+        $stmt->bindParam(':start_city', $route->getStartCity());
+        $stmt->bindParam(':end_city', $route->getEndCity());
         $stmt->execute();
     }
+    
 
     public function updateRoad($road, $id) {
         $query = "UPDATE Road 

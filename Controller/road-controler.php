@@ -1,48 +1,40 @@
 <?php
 include_once 'Model\RoadDao.php';
+require_once 'Model\cityDAO.php';
 class RouteController
 {
-    private $routeDAO;
+    
 
-    public function __construct()
-    {
-        $this->routeDAO = new RoadDao();
-    }
-
-    public function indexRout()
+    public static function indexRout()
 {
     $routeDAO = new RoadDao();
-    // Display a list of routes
     $routes = $routeDAO->getAllRoads();
     // Include your view file (e.g., route/index.php) to display the list
     include 'view\route\routeIndex.php';
 }
-   
+        public static function getcitys(){
+              
+               $ville = new cityDAO();
+               $villes= $ville->get_citys();
+               include 'view\route\add.php';
 
-    public function add()
+
+
+        }
+
+    public function insert_rout()
     {
-        // Handle the addition of a new route
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Validate and process the form data
-            $startCityID = $_POST['startCityID'];
-            $endCityID = $_POST['endCityID'];
-            $distance = $_POST['distance'];
-            $duration = $_POST['duration'];
-
+        extract($_POST);
+        
             // Create a Route object
-            $route = new Route(null, $startCityID, $endCityID, $distance, $duration);
-
-            // Add the route to the database
-            $this->routeDAO->addRoute($route);
+            $route = new Route( $distance,$duration,$departureCity,$arrivalCity);
+            $routeDAO = new RoadDao();
+            $routeDAO->addRoad($route);
 
             // Redirect to the index page or show a success message
             header('Location: index.php');
             exit();
-        } else {
-            // Display the form to add a new route
-            // Include your view file (e.g., route/add.php)
-            include '../view/route/add.php';
-        }
+       
     }
 
     public function edit($routeID)

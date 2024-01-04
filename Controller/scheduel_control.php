@@ -53,8 +53,56 @@ return     $citys_slct;
 
 
 }
-    
-    
+public static function insert_data_sched(){
+    extract($_POST);
+
+    // Split the rout value into startcity and endcity
+    list($startcity, $endcity) = explode('-', $rout);
+    $schedule = new Schedule($date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
+        
+    $ScheduleDAO = new ScheduleDAO();
+    $ScheduleDAO->addSchedule($schedule);
+    header('location:index.php');
+}
+
+      public static function get_schet_id($id){
+        $ScheduleDAO = new ScheduleDAO();
+        $scheduel= $ScheduleDAO->get_schet_byid($id);  
+        return $scheduel;
+        
+        
+       
+      }
+
+public static function update_sched(){
+    extract($_POST);
+
+    // Split the rout value into startcity and endcity
+    list($startcity, $endcity) = explode('-', $rout);
+    $schedule = new Schedule($date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
+        
+    $ScheduleDAO = new ScheduleDAO();
+    $ScheduleDAO->addSchedule($schedule);
+    header('location:index.php');
+}
+ 
+public static function updat_data_sched(){
+    extract($_POST);
+
+    // Split the rout value into startcity and endcity
+    list($startcity, $endcity) = explode('-', $rout);
+    $schedule = new Schedule($date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
+    $ScheduleDAO = new ScheduleDAO();
+    $ScheduleDAO->updateSchedule($schedule , $id);
+    header('location:index.php?action=scheduel_management');
+
+}
+   public static function delet_sched($id){
+    $ScheduleDAO = new ScheduleDAO();
+    $ScheduleDAO->deleteSchedule($id);
+    header('location:index.php?action=scheduel_management');
+
+   }
 }
     
   

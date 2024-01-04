@@ -1,7 +1,6 @@
 
 <?php
 
-require_once 'config\Connection.php';
 require_once 'Model\ClassSchedule.php';
 
 class ScheduleDAO {
@@ -94,43 +93,71 @@ class ScheduleDAO {
     
 
     public function addSchedule($schedule) {
-        $query = "INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, busnumber, startcity, endcity) 
-                  VALUES (:date, :departuretime, :arrivaltime, :availableseats, :price, :busnumber, :startcity, :endcity)";
+        $query = "INSERT INTO Schedule (date, departuretime, arrivaltime, availableseats, price, bus_id, startcity, endcity) 
+                  VALUES (:date, :departuretime, :arrivaltime, :availableseats, :price, :bus_id, :startcity, :endcity)";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':date', $schedule->getDate());
-        $stmt->bindParam(':departuretime', $schedule->getDepartureTime());
-        $stmt->bindParam(':arrivaltime', $schedule->getArrivalTime());
-        $stmt->bindParam(':availableseats', $schedule->getAvailableSeats());
-        $stmt->bindParam(':price', $schedule->getPrice());
-        $stmt->bindParam(':busnumber', $schedule->getBusNumber());
-        $stmt->bindParam(':startcity', $schedule->getStartCity());
-        $stmt->bindParam(':endcity', $schedule->getEndCity());
+    
+        $date = $schedule->getDate();
+        $departuretime = $schedule->getDepartureTime();
+        $arrivaltime = $schedule->getArrivalTime();
+        $availableseats = $schedule->getAvailableSeats();
+        $price = $schedule->getPrice();
+        $bus_id = $schedule->getBus_id();
+        $startcity = $schedule->getStartCity();
+        $endcity = $schedule->getEndCity();
+    
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':departuretime', $departuretime);
+        $stmt->bindParam(':arrivaltime', $arrivaltime);
+        $stmt->bindParam(':availableseats', $availableseats);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':bus_id', $bus_id);
+        $stmt->bindParam(':startcity', $startcity);
+        $stmt->bindParam(':endcity', $endcity);
+    
         $stmt->execute();
     }
+       public function get_schet_byid($id){
+             
+        $query = "SELECT * FROM Schedule where id = $id";
+        $stmt = $this->db->query($query);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+       }
 
-    public function updateSchedule($schedule, $id) {
+       public function updateSchedule($schedule, $id) {
         $query = "UPDATE Schedule 
                   SET date = :date, 
                       departuretime = :departuretime, 
                       arrivaltime = :arrivaltime, 
                       availableseats = :availableseats, 
                       price = :price, 
-                      busnumber = :busnumber, 
+                      bus_id = :bus_id, 
                       startcity = :startcity, 
                       endcity = :endcity 
                   WHERE id = :id";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':date', $schedule->getDate());
-        $stmt->bindParam(':departuretime', $schedule->getDepartureTime());
-        $stmt->bindParam(':arrivaltime', $schedule->getArrivalTime());
-        $stmt->bindParam(':availableseats', $schedule->getAvailableSeats());
-        $stmt->bindParam(':price', $schedule->getPrice());
-        $stmt->bindParam(':busnumber', $schedule->getBusNumber());
-        $stmt->bindParam(':startcity', $schedule->getStartCity());
-        $stmt->bindParam(':endcity', $schedule->getEndCity());
+        $date = $schedule->getDate();
+        $departuretime = $schedule->getDepartureTime();
+        $arrivaltime = $schedule->getArrivalTime();
+        $availableseats = $schedule->getAvailableSeats();
+        $price = $schedule->getPrice();
+        $bus_id = $schedule->getBus_id();
+        $startcity = $schedule->getStartCity();
+        $endcity = $schedule->getEndCity();
+    
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':departuretime', $departuretime);
+        $stmt->bindParam(':arrivaltime', $arrivaltime);
+        $stmt->bindParam(':availableseats', $availableseats);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':bus_id', $bus_id); // Changed from :busnumber to :bus_id
+        $stmt->bindParam(':startcity', $startcity);
+        $stmt->bindParam(':endcity', $endcity);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+    
 
     public function deleteSchedule($id) {
         $query = "DELETE FROM Schedule WHERE id = :id";

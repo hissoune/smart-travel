@@ -37,8 +37,8 @@
        
           <td class="d-flex justify-content-center">
           
-                <a href="index.php?action=modify_company&id=<?= $Schedul['id']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delet_compe&id=<?= $Schedul['id']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
+                <a href="index.php?action=modify_sched&id=<?= $Schedul['id']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
+                <a href="index.php?action=delet_sched&id=<?= $Schedul['id']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 

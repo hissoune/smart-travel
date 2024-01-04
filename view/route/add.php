@@ -1,42 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'view\head.php'; ?>
+<?php include 'view\nav.php'; ?>
+<div class="container   bg-success-subtle p-4">
+    <h2 class="mb-4 fs-2 text-center"><strong>add your routes</strong> </h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Route</title>
-</head>
+    <form action="index.php?action=insert_rout" method="POST">
+        
 
-<body>
-    <h1>Add New Route</h1>
+        <div class="mb-3">
+            <label for="distance" class="form-label">distance:</label>
+            <input type="number" class="form-control" id="distance" name="distance" required>
+        </div>
 
-    <form action="index.php" method="post">
-        <label for="startCityID">Start City ID:</label>
-        <input type="text" id="startCityID" name="startCityID" required>
+        <div class="mb-3">
+            <label for="duration" class="form-label">duration:</label>
+            <input type="time" class="form-control" id="duration" name="duration" required>
+        </div>
 
-        <br>
+        
+        <div class="">
+                              <label>start city</label>
 
-        <label for="endCityID">End City ID:</label>
-        <input type="text" id="endCityID" name="endCityID" required>
+                              <select class="form-control" name="departureCity">
 
-        <br>
+                                 <?php foreach ($villes as $ville) { ?>
 
-        <label for="distance">Distance:</label>
-        <input type="text" id="distance" name="distance" required>
+                                    <option>
+                                       <?= $ville['cityname']; ?>
+                                    </option>
+                                 <?php } ?>
+                              </select>
+                           </div>
+                           <div class="mb-3">
+                              <label>end city</label>
+                              <select class="form-control" name="arrivalCity">
 
-        <br>
+                                 <?php foreach ($villes as $ville) { ?>
 
-        <label for="duration">Duration:</label>
-        <input type="text" id="duration" name="duration" required>
+                                    <option>
+                                       <?= $ville['cityname']; ?>
+                                    </option>
+                                 <?php } ?>
+                              </select>
+                           </div>
+        
+        
 
-        <br>
-
-        <input type="submit" value="Add Route">
+        
+        <button type="submit" class="btn btn-primary">add rout</button>
     </form>
-
-    <br>
-
-    <a href="index.php">Back to Route List</a>
-</body>
-
-</html>
+</div>

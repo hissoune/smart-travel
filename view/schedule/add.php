@@ -6,7 +6,7 @@
     <form action="index.php?action=insert_schet" method="POST">
         <div class="mb-3">
             <label for="date" class="form-label">Date:</label>
-            <input type="date" class="form-control" id="date" name="date_schet" required>
+            <input type="date" class="form-control" id="date" name="date_sched" required>
         </div>
 
         <div class="mb-3">
@@ -47,20 +47,20 @@
 
 
         <div class="mb-3">
-            <label for="startcity" class="form-label">Start root:</label>
-            <select class="form-select" id="bus_id" name="bus_id" required>
+            <label for="rout" class="form-label">Select root:</label>
+            <select class="form-select" id="rout" name="rout" required>
         
         <option value="" selected disabled>Select city</option>
 
         
         <?php
-        foreach ($routes as $select) {
-            echo '<option value="' . $select->getStartcity() . '-' . $select->getStartcity() . '">' . $select->getStartcity() . ' to ' . $select->getStartcity() . '</option>';
+        foreach ($route as $select) {
+            echo '<option value="' . $select['startcity'] . '-' . $select['endcity'] . '">' . $select['startcity'] . ' to ' . $select['endcity'] . '</option>';
         }
         ?>
     </select>        </div>
 
        
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">add scheduel</button>
     </form>
 </div>

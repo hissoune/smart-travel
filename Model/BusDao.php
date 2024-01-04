@@ -1,5 +1,4 @@
 <?php
-require_once 'config\Connection.php';
 require_once 'Model\ClassBus.php';
 
 class BusDao {

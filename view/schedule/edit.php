@@ -1,56 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'view\head.php'; ?>
+<?php include 'view\nav.php'; ?>
+<div class="container   bg-success-subtle p-4">
+    <h2 class="mb-4 fs-2 text-center"><strong>modify your scheduele</strong> </h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Schedule</title>
-</head>
+    <form action="index.php?action=modify_schet" method="POST">
+    <input type="number" hidden class="form-control" value="<?= $id ;?>" id="date" name="id" required>
 
-<body>
-    <h1>Edit Schedule</h1>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date:</label>
+            <input type="date" class="form-control" value="<?= $date_sched  ;?>" id="date" name="date_sched" required>
+        </div>
 
-    <form action="index.php" method="post">
-        <input type="hidden" name="scheduleID" value="<?= $schedule->getScheduleID(); ?>">
+        <div class="mb-3">
+            <label for="departuretime" class="form-label">Departure Time:</label>
+            <input type="time" class="form-control"  value="<?= $departuretime  ;?>" id="departuretime" name="departuretime" required>
+        </div>
 
-        <label for="date">Date:</label>
-        <input type="text" id="date" name="date" value="<?= $schedule->getDate(); ?>" required>
+        <div class="mb-3">
+            <label for="arrivaltime" class="form-label">Arrival Time:</label>
+            <input type="time" class="form-control"  value="<?= $arrivaltime  ;?>" id="arrivaltime" name="arrivaltime" required>
+        </div>
 
-        <br>
+        <div class="mb-3">
+            <label for="availableseats" class="form-label">Available Seats:</label>
+            <input type="number" class="form-control"  value="<?= $availableseats  ;?>" id="availableseats" name="availableseats" required>
+        </div>
 
-        <label for="departureTime">Departure Time:</label>
-        <input type="text" id="departureTime" name="departureTime" value="<?= $schedule->getDepartureTime(); ?>"
-            required>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" step="0.01"  value="<?= $price  ;?>" class="form-control" id="price" name="price" required>
+        </div>
 
-        <br>
+        <div class="mb-3">
+    <label for="bus_id" class="form-label">Bus name:</label>
+    <select class="form-select" id="bus_id"   name="bus_id" required>
+        
+        <option value="" selected disabled>Select Bus</option>
 
-        <label for="arrivalTime">Arrival Time:</label>
-        <input type="text" id="arrivalTime" name="arrivalTime" value="<?= $schedule->getArrivalTime(); ?>" required>
+        
+        <?php
+        foreach ($bus_name as $bus) {
+            
+            echo '<option value="' . $bus['id'] . '">' . $bus['licenseplate'] . '</option>';
+        }
+        ?>
+    </select>
+</div>
 
-        <br>
 
-        <label for="availableSeats">Available Seats:</label>
-        <input type="text" id="availableSeats" name="availableSeats" value="<?= $schedule->getAvailableSeats(); ?>"
-            required>
+        <div class="mb-3">
+            <label for="rout" class="form-label">Select root:</label>
+            <select class="form-select"   id="rout" name="rout" required>
+        
+        <option value="" selected disabled>Select city</option>
 
-        <br>
+        
+        <?php
+        foreach ($route as $select) {
+            echo '<option value="' . $select['startcity'] . '-' . $select['endcity'] . '">' . $select['startcity'] . ' to ' . $select['endcity'] . '</option>';
+        }
+        ?>
+    </select>        </div>
 
-        <label for="busID">Bus ID:</label>
-        <input type="text" id="busID" name="busID" value="<?= $schedule->getBusID(); ?>" required>
-
-        <br>
-
-        <label for="routeID">Route ID:</label>
-        <input type="text" id="routeID" name="routeID" value="<?= $schedule->getRouteID(); ?>" required>
-
-        <br>
-
-        <input type="submit" value="Update Schedule">
+       
+        <button type="submit" class="btn btn-primary">modify scheduel</button>
     </form>
-
-    <br>
-
-    <a href="index.php">Back to Schedule List</a>
-</body>
-
-</html>
+</div>

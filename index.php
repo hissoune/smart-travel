@@ -1,5 +1,6 @@
 <?php
 
+require_once 'config/Connection.php';
 
 
 if (isset($_GET['action']) ) {
@@ -84,6 +85,23 @@ switch ($action) {
                                     $controler_rout = new RouteController();
                                     $controler_rout->indexRout();
                                     break;
+                                    case 'add_root':
+                                        require_once 'Controller\road-controler.php';
+                                    $controler_rout = new RouteController();
+                                    $controler_rout->getcitys();
+
+                                 break;
+                                 case 'insert_rout':
+                                    require_once 'Controller\road-controler.php';
+                                    $controler_rout = new RouteController();
+                                    $controler_rout->insert_rout();
+
+                                    break;
+
+
+
+
+
                                     case 'delet_rout':
                                         require_once 'Controller\road-controler.php';
                                         $controler_rout = new RouteController();
@@ -136,6 +154,52 @@ switch ($action) {
 
                                       
                                     break;
+                                    case 'insert_schet':
+                                        require_once 'Controller\scheduel_control.php';
+                                         $controler_sched = new Controler_schet();
+                                         $controler_sched-> insert_data_sched();
+
+                                        break;
+                                        case 'modify_sched':
+                                            $id = $_GET['id'];
+                                    require_once 'Controller\scheduel_control.php';
+                                    $controler_sched = new Controler_schet();
+                                    $route= $controler_sched->get_citys();
+                                    $bus_name= $controler_sched->get_comp_select();
+                                    $scheduel= $controler_sched->get_schet_id($id);
+                                    $id=$scheduel['id'];
+                                    $date_sched=$scheduel['date'];
+                                    $departuretime=$scheduel['departuretime'];
+                                     $arrivaltime=$scheduel['arrivaltime'];
+                                     $availableseats=$scheduel['availableseats'];
+                                     $price=$scheduel['price'];
+                                    
+                                     $startcity=$scheduel['startcity'];
+                                     $endcity=$scheduel['endcity'];
+
+                                    require_once 'view\schedule\edit.php';
+
+                                            break;
+                                            case 'modify_schet':
+
+                                                require_once 'Controller\scheduel_control.php';
+                                                $controler_sched = new Controler_schet();
+                                                $controler_sched-> updat_data_sched();
+       
+
+                                                break;
+
+                                                case 'delet_sched':
+                                                    $id=$_GET['id'];
+                                                    require_once 'Controller\scheduel_control.php';
+                                                    $controler_sched = new Controler_schet();
+                                                    $controler_sched-> delet_sched($id);
+                                                   
+                                                   
+                                                    
+
+
+                                                    break;
     
 
     // Add more cases as needed
