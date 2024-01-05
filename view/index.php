@@ -89,8 +89,9 @@
       </div>
    </div>
    <div  >
-   <div class="" id="searchResults"></div>
 </div>
+<div class=" w-100 " id="searchResults"></div>
+
 </section>
 
 <div id="about" class="about container w-75">

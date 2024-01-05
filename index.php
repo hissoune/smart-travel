@@ -156,7 +156,7 @@ switch ($action) {
                                             $comp_bus_slct= $controler_sched->get_comp_select();
                                             include 'view\form_serach.php';
                                             break;
-                                        case'filter':
+                                        case'filter_bycomp':
                                             session_start();
                                             $departureCity=   $_SESSION['departcity'];
                                             $arrivalCity=   $_SESSION['arivcity'];
@@ -166,8 +166,60 @@ switch ($action) {
                                           require_once 'Controller\scheduel_control.php';
                                       
                                           $controler_sched = new Controler_schet();
-                                          $controler_sched->get_scheduel_filred($departureCity,$arrivalCity,$date_trip,$num_papl);
+                                          $controler_sched->get_scheduel_filred_bycompany($departureCity,$arrivalCity,$date_trip,$num_papl);
                                           break;
+                                          case 'filter_byprice':
+                                            session_start();
+                                            $departureCity=   $_SESSION['departcity'];
+                                            $arrivalCity=   $_SESSION['arivcity'];
+                                            $date_trip= $_SESSION['date'];
+                                            $num_papl=  $_SESSION['num_papl'];
+                                           
+                                          require_once 'Controller\scheduel_control.php';
+                                      
+                                          $controler_sched = new Controler_schet();
+                                          $controler_sched->get_scheduel_filred_byprice($departureCity,$arrivalCity,$date_trip,$num_papl);
+
+                                            break;
+                                            case 'filter_morning':
+                                                session_start();
+                                                $departureCity=   $_SESSION['departcity'];
+                                                $arrivalCity=   $_SESSION['arivcity'];
+                                                $date_trip= $_SESSION['date'];
+                                                $num_papl=  $_SESSION['num_papl'];
+                                               
+                                              require_once 'Controller\scheduel_control.php';
+                                          
+                                              $controler_sched = new Controler_schet();
+                                              $controler_sched->get_scheduel_filred_morning($departureCity,$arrivalCity,$date_trip,$num_papl);
+
+                                                break;
+                                                case 'filter_evning':
+                                                    session_start();
+                                                    $departureCity=   $_SESSION['departcity'];
+                                                    $arrivalCity=   $_SESSION['arivcity'];
+                                                    $date_trip= $_SESSION['date'];
+                                                    $num_papl=  $_SESSION['num_papl'];
+                                                   
+                                                  require_once 'Controller\scheduel_control.php';
+                                              
+                                                  $controler_sched = new Controler_schet();
+                                                  $controler_sched->get_scheduel_filred_evning($departureCity,$arrivalCity,$date_trip,$num_papl);
+                                                    break;
+
+                                                    case 'filter_night':
+                                                        session_start();
+                                                        $departureCity=   $_SESSION['departcity'];
+                                                        $arrivalCity=   $_SESSION['arivcity'];
+                                                        $date_trip= $_SESSION['date'];
+                                                        $num_papl=  $_SESSION['num_papl'];
+                                                       
+                                                      require_once 'Controller\scheduel_control.php';
+                                                  
+                                                      $controler_sched = new Controler_schet();
+                                                      $controler_sched->get_scheduel_filred_night($departureCity,$arrivalCity,$date_trip,$num_papl);
+                                                        break;
+
                                  case 'add_scheduel':
                                     require_once 'Controller\scheduel_control.php';
                                     $controler_sched = new Controler_schet();

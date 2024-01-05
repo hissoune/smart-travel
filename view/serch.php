@@ -4,6 +4,8 @@
     .contserched{
         background-color: rgba(255, 230, 200, 0.3);
      }
+
+     
 </style>
 
 <?php
@@ -19,15 +21,16 @@
          <form action="index.php?action=get_filter" id="get_filter" method="GET">
             <button type="submit" class="btn btn-warning">filter</button>
          </form>
-         <div id="get_form"> </div>
+         <div class="row cont ">
+         <div class="col-3 mt-5 mb-3 " id="get_form"> </div>
             
-
-       <div class=" row mt-5 contserched ">
+         <div class="col-9" > 
+       <div class=" row  mt-5   contserched ">
        <h1 class="text-center  fs-2 text-warning shadow">RESULTAS DE SEARCH</h1>
       <?php  foreach ($schedueles as $schedule) { ?>
        
     
-        <div class="card shadow col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mx-4 mt-4 mb-4" style="width: 20rem;">
+        <div class="card shadow col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12 mx-4 mt-4 mb-4" style="width: 20rem;">
     <img src="view/images/<?= $schedule['img']; ?>" class="card-img-top" alt="company img">
     <div class="card-body">
         <h5 class="card-title"><?= $schedule['companyname']; ?></h5>
@@ -64,6 +67,8 @@
 
 
          ?>
+         </div>
+         </div>
          </div>
 
         

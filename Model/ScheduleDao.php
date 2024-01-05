@@ -53,8 +53,7 @@ class ScheduleDAO {
     }else return $result=[];
 
     }
-
-    public function getSchedulesByCitiesAndDateandfilter($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter,  $companyNameFilter)
+    function getSchedulesByCitiesAndDateandfilter_company($departureCity, $arrivalCity, $travelDate, $numPeople, $companyNameFilter)
     {
         // Base query
         $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule 
@@ -63,13 +62,16 @@ class ScheduleDAO {
                   WHERE startcity = :departureCity 
                         AND endcity = :arrivalCity 
                         AND availableseats >= :numPeople 
-                        AND date = :travelDate 
-                        AND company.companyname = :companyNameFilter";
+                        AND date = :travelDate ";
+                        
+                       
                 
-        // Add the condition for ordering by price if $priceFilter is true
-        if ($priceFilter) {
-            $query .= " ORDER BY price ASC";
-        }
+       if(!empty($companyNameFilter)){
+        $query .= " AND company.companyname= :companyNameFilter ";
+
+
+      
+      
     
         // Add the condition for filtering by bus name if $busNameFilter is not empty
         
@@ -84,15 +86,181 @@ class ScheduleDAO {
             
         ];
     
-        // Add the parameter for bus name if $busNameFilter is not empty
-        
-    
+        // Add the parameter for bus name if $busNameFilter is not empt
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
         return $result;
+    }else{
+        return $result=[];
     }
+    }
+    public function getSchedulesByCitiesAndDateandfilter_price($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter)
+    {
+        // Base query
+        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule 
+                  JOIN Bus ON Schedule.bus_id = Bus.id 
+                  JOIN Company ON Bus.comp_id = company.id
+                  WHERE startcity = :departureCity 
+                        AND endcity = :arrivalCity 
+                        AND availableseats >= :numPeople 
+                        AND date = :travelDate ";
+                       
+                
+        // Add the condition for ordering by price if $priceFilter is true
+        if ($priceFilter) {
+            $query .= " ORDER BY price ASC";
+       
+    
+        // Add the condition for filtering by bus name if $busNameFilter is not empty
+        
+    
+        // Prepare and execute the query
+        $params = [
+            ':departureCity' => $departureCity,
+            ':arrivalCity' => $arrivalCity,
+            ':numPeople' => $numPeople,
+            ':travelDate' => $travelDate,
+        
+            
+        ];
+    
+        // Add the parameter for bus name if $busNameFilter is not empt
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }else{
+        return $result=[];
+    }
+    }
+
+    public function getSchedulesByCitiesAndDateandfilter_morning($departureCity, $arrivalCity, $travelDate, $numPeople, $morning)
+    {
+        // Base query
+        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule 
+                  JOIN Bus ON Schedule.bus_id = Bus.id 
+                  JOIN Company ON Bus.comp_id = company.id
+                  WHERE startcity = :departureCity 
+                        AND endcity = :arrivalCity 
+                        AND availableseats >= :numPeople 
+                        AND date = :travelDate ";
+                       
+                
+        // Add the condition for ordering by price if $priceFilter is true
+        if ($morning) {
+            $query .= " AND departuretime <='12:00:00'";
+       
+    
+        // Add the condition for filtering by bus name if $busNameFilter is not empty
+        
+    
+        // Prepare and execute the query
+        $params = [
+            ':departureCity' => $departureCity,
+            ':arrivalCity' => $arrivalCity,
+            ':numPeople' => $numPeople,
+            ':travelDate' => $travelDate,
+           
+            
+        ];
+    
+        // Add the parameter for bus name if $busNameFilter is not empt
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }else{
+        return $result=[];
+    }
+    }
+
+    public function getSchedulesByCitiesAndDateandfilter_evning($departureCity, $arrivalCity, $travelDate, $numPeople, $evning)
+    {
+        // Base query
+        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule 
+                  JOIN Bus ON Schedule.bus_id = Bus.id 
+                  JOIN Company ON Bus.comp_id = company.id
+                  WHERE startcity = :departureCity 
+                        AND endcity = :arrivalCity 
+                        AND availableseats >= :numPeople 
+                        AND date = :travelDate ";
+                       
+                
+        // Add the condition for ordering by price if $priceFilter is true
+        if ($evning) {
+            $query .= " AND departuretime >='13:00:00' AND departuretime <='18:00:00'";
+       
+    
+        // Add the condition for filtering by bus name if $busNameFilter is not empty
+        
+    
+        // Prepare and execute the query
+        $params = [
+            ':departureCity' => $departureCity,
+            ':arrivalCity' => $arrivalCity,
+            ':numPeople' => $numPeople,
+            ':travelDate' => $travelDate,
+           
+            
+        ];
+    
+        // Add the parameter for bus name if $busNameFilter is not empt
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }else{
+        return $result=[];
+    }
+    }
+    public function getSchedulesByCitiesAndDateandfilter_night($departureCity, $arrivalCity, $travelDate, $numPeople, $night)
+    {
+        // Base query
+        $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname, company.img FROM Schedule 
+                  JOIN Bus ON Schedule.bus_id = Bus.id 
+                  JOIN Company ON Bus.comp_id = company.id
+                  WHERE startcity = :departureCity 
+                        AND endcity = :arrivalCity 
+                        AND availableseats >= :numPeople 
+                        AND date = :travelDate ";
+                       
+                
+        // Add the condition for ordering by price if $priceFilter is true
+        if ($night) {
+            $query .= " AND departuretime >='19:00:00'";
+       
+    
+        // Add the condition for filtering by bus name if $busNameFilter is not empty
+        
+    
+        // Prepare and execute the query
+        $params = [
+            ':departureCity' => $departureCity,
+            ':arrivalCity' => $arrivalCity,
+            ':numPeople' => $numPeople,
+            ':travelDate' => $travelDate,
+           
+            
+        ];
+    
+        // Add the parameter for bus name if $busNameFilter is not empt
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }else{
+        return $result=[];
+    }
+    }
+
+
+    
     
 
     public function addSchedule($schedule) {

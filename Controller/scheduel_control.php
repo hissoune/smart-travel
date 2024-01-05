@@ -39,7 +39,7 @@ return     $citys_slct;
     }
 
 
-    public static function get_scheduel_filred($departureCity,$arrivalCity,$date_trip,$num_papl){
+    public static function get_scheduel_filred_bycompany($departureCity,$arrivalCity,$date_trip,$num_papl){
      
   
       
@@ -47,12 +47,72 @@ return     $citys_slct;
     
 
         $ScheduleDAO = new ScheduleDAO();
-        $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter($departureCity,$arrivalCity,$date_trip,$num_papl,$by_price,$company_name);
+        $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter_company($departureCity,$arrivalCity,$date_trip,$num_papl,$company_name);
         require_once 'view\serch.php';
    
 
 
 }
+
+public static function get_scheduel_filred_byprice($departureCity,$arrivalCity,$date_trip,$num_papl){
+     
+  
+      
+  extract($_GET)  ;
+
+
+  $ScheduleDAO = new ScheduleDAO();
+  $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter_price($departureCity,$arrivalCity,$date_trip,$num_papl,$by_price);
+  require_once 'view\serch.php';
+
+
+
+}
+
+public static function get_scheduel_filred_morning($departureCity,$arrivalCity,$date_trip,$num_papl){
+     
+  
+      
+  extract($_GET)  ;
+
+
+  $ScheduleDAO = new ScheduleDAO();
+  $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter_morning($departureCity,$arrivalCity,$date_trip,$num_papl,$morning);
+  require_once 'view\serch.php';
+
+
+
+}
+
+public static function get_scheduel_filred_evning($departureCity,$arrivalCity,$date_trip,$num_papl){
+     
+  
+      
+  extract($_GET)  ;
+
+
+  $ScheduleDAO = new ScheduleDAO();
+  $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter_evning($departureCity,$arrivalCity,$date_trip,$num_papl,$evning);
+  require_once 'view\serch.php';
+
+
+
+}
+public static function get_scheduel_filred_night($departureCity,$arrivalCity,$date_trip,$num_papl){
+     
+  
+      
+  extract($_GET)  ;
+
+
+  $ScheduleDAO = new ScheduleDAO();
+  $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter_night($departureCity,$arrivalCity,$date_trip,$num_papl,$night);
+  require_once 'view\serch.php';
+
+
+
+}
+
 public static function insert_data_sched(){
     extract($_POST);
 
