@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Schedule {
     private $id;
     private $date;
@@ -9,18 +7,18 @@ class Schedule {
     private $arrivalTime;
     private $availableSeats;
     private $price;
-    private $bus_id;
+    private $busId;
     private $startCity;
     private $endCity;
 
-    public function __construct( $date, $departureTime, $arrivalTime, $availableSeats, $price, $bus_id, $startCity, $endCity) {
-        
+    public function __construct($id, $date, $departureTime, $arrivalTime, $availableSeats, $price, $busId, $startCity, $endCity) {
+        $this->id = $id;
         $this->date = $date;
         $this->departureTime = $departureTime;
         $this->arrivalTime = $arrivalTime;
         $this->availableSeats = $availableSeats;
         $this->price = $price;
-        $this->bus_id = $bus_id;
+        $this->busId = $busId;
         $this->startCity = $startCity;
         $this->endCity = $endCity;
     }
@@ -49,8 +47,8 @@ class Schedule {
         return $this->price;
     }
 
-    public function getBus_id() {
-        return $this->bus_id;
+    public function getBusId() {
+        return $this->busId;
     }
 
     public function getStartCity() {

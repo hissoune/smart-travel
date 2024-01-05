@@ -1,18 +1,24 @@
 <?php
 class Bus {
+    private $id;
     private $busnumber;
     private $licenseplate;
     private $capacity;
-    private $companyname;
+    private $companyId;
 
-    public function __construct($busnumber, $licenseplate, $capacity, $companyname){
+    public function __construct($id, $busnumber, $licenseplate, $capacity, $companyId){
+        $this->id = $id;
         $this->busnumber = $busnumber;
         $this->licenseplate = $licenseplate;
         $this->capacity = $capacity;
-        $this->companyname = $companyname;
+        $this->companyId = $companyId;
     }
 
     // Getter methods
+    public function getId(){
+        return $this->id;
+    }
+
     public function getBusNumber(){
         return $this->busnumber;
     }
@@ -25,8 +31,9 @@ class Bus {
         return $this->capacity;
     }
 
-    public function getCompanyName(){
-        return $this->companyname;
+    public function getCompanyId(){
+        return $this->companyId;
     }
 }
+
 ?>

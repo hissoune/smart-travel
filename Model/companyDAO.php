@@ -15,12 +15,9 @@ class CompanyDAO {
         $comp = array();
         foreach ($result as $row) {
             // Append each company's details as an array to the $comp array
-            $comp[] = [
-                  'id'=>$row["id"],
-                'companyname' => $row["companyname"],
-                'shortname' => $row["shortname"],
-                'img' => $row["img"]
-            ];
+            $companies = new company($row['id'],$row['companyname'],$row['shortname'],$row['img']);
+            
+            $comp[] = $companies;
         }
         return $comp;
     }

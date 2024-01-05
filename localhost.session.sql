@@ -34,7 +34,7 @@ CREATE TABLE Bus (
     busnumber INT UNIQUE ,
     licenseplate VARCHAR(250) UNIQUE,
     capacity INT,
-    companyname VARCHAR(250),
+   
     comp_id int ,
     FOREIGN KEY (comp_id) REFERENCES Company(id)
     

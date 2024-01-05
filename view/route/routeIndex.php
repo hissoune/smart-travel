@@ -19,17 +19,17 @@
         <tbody>
         <?php foreach ($routes as $route) : ?>
           <tr>
-          <td><?= $route['distance']; ?></td>
-          <td><?= $route['duration']; ?></td>
-          <td><?= $route['startcity']; ?></td>
-          <td><?= $route['endcity']; ?></td>
+          <td><?= $route->getDistance(); ?></td>
+          <td><?= $route->getDuration(); ?></td>
+          <td><?= $route->getStartCity(); ?></td>
+          <td><?= $route->getEndCity(); ?></td>
           
           
        
           <td class="d-flex justify-content-center">
           
-                <a href="index.php?action=modify_rout&startcity=<?= $route['startcity']?>&endcity=<?=$route['endcity'] ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delet_rout&startcity=<?= $route['startcity']?>&endcity=<?=$route['endcity'] ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
+                <a href="index.php?action=modify_rout&startcity=<?= $route->getStartCity()?>&endcity=<?=$route->getEndCity() ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
+                <a href="index.php?action=delet_rout&startcity=<?= $route->getStartCity()?>&endcity=<?=$route->getEndCity() ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 

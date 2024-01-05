@@ -1,14 +1,23 @@
 <?php
-Class Company {
+class Company {
+    private $id;
     private $companyname;
     private $shortname;
     private $img;
 
-    public function __construct($companyname,$shortname,$img){
-        $this->copanyname=$companyname;
-        $this->shortname=$shortname;
-        $this->img=$img;
-        
+    public function __construct($id, $companyname, $shortname, $img){
+        $this->id = $id;
+        $this->companyname = $companyname;
+        $this->shortname = $shortname;
+        $this->img = $img;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -35,5 +44,6 @@ Class Company {
         return $this->img;
     }
 }
+
 
 ?>

@@ -17,16 +17,16 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($buses as $bus){ ?>
+        <?php foreach ($buses as $buse){ ?>
           <tr>
-          <td><?= $bus['busnumber']; ?></td>
-          <td><?= $bus['licenseplate']; ?></td>
-          <td><?= $bus['capacity']; ?></td>
-          <td><?= $bus['companyname']; ?></td>
+          <td><?php echo $buse->getBusNumber(); ?></td>
+          <td><?= $buse->getLicensePlate(); ?></td>
+          <td><?= $buse->getCapacity(); ?></td>
+          <td><?= $bus->get_companyname_byid($buse->getCompanyId()); ?></td>
           <td class="d-flex justify-content-center">
-            <input type="hidden " value="<?= $bus['id']; ?>">
-                <a href="index.php?action=modify_bus&id=<?= $bus['id']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delete&id=<?= $bus['id']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
+            <input type="hidden " hidden value="<?= $buse->getId(); ?>">
+                <a href="index.php?action=modify_bus&id=<?= $buse->getId(); ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
+                <a href="index.php?action=delete&id=<?= $buse->getId(); ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 

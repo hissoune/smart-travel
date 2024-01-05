@@ -35,10 +35,38 @@ class ScheduleDAO {
         $query = "SELECT * FROM Schedule  ";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $scheds = array();
+        foreach($result as $row){
+            $sched = new Schedule($row['id'],$row['date'],$row['departuretime'],$row['arrivaltime'],$row['availableseats'],$row['price'],$row['bus_id'],$row['startcity'],$row['endcity']);
+            $scheds[]=$sched;
+        }
+
         
-        return $result;
+        return $scheds;
         // SELECT * FROM Schedule where startcity= '' and endcity= '' and availableseats>= 22;
     }
+    public function get_buslac_byid($id){
+        $query= "SELECT Bus.licenseplate from Schedule join Bus on Schedule.bus_id=Bus.id where bus_id = $id ";
+        $stmt = $this->db->query($query);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['licenseplate'];
+    }
+
+    public function get_companyname_byid($id){
+        $query= "SELECT company.companyname from Schedule join Bus on Schedule.bus_id=Bus.id join company on Bus.comp_id=company.id where bus_id = $id ";
+        $stmt = $this->db->query($query);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['companyname'];
+    }
+
+    public function get_companyimg_byid($id){
+        $query= "SELECT company.img from Schedule join Bus on Schedule.bus_id=Bus.id join company on Bus.comp_id=company.id where bus_id = $id ";
+        $stmt = $this->db->query($query);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['img'];
+    }
+
+
 
     public function getSchedulesByCitiesAndDate($departureCity, $arrivalCity ,$travelDate, $numberof_peapl)
     
@@ -49,8 +77,13 @@ class ScheduleDAO {
         $query = "SELECT Schedule.*, Bus.licenseplate, company.companyname , company.img FROM Schedule JOIN Bus ON Schedule.bus_id = Bus.id JOIN Company ON Bus.comp_id = company.id  where startcity= '$departureCity' and endcity= '$arrivalCity' and availableseats>= $numberof_peapl and date='$travelDate' ";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }else return $result=[];
+        $scheds= array();
+        foreach($result as $row){
+            $sched = new Schedule($row['id'],$row['date'],$row['departuretime'],$row['arrivaltime'],$row['availableseats'],$row['price'],$row['bus_id'],$row['startcity'],$row['endcity']);
+             $scheds[]=$sched;
+             
+        }return $scheds;
+    }else return $scheds=[];
 
     }
     function getSchedulesByCitiesAndDateandfilter_company($departureCity, $arrivalCity, $travelDate, $numPeople, $companyNameFilter)
@@ -91,10 +124,13 @@ class ScheduleDAO {
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        return $result;
-    }else{
-        return $result=[];
-    }
+        $scheds= array();
+        foreach($result as $row){
+            $sched = new Schedule($row['id'],$row['date'],$row['departuretime'],$row['arrivaltime'],$row['availableseats'],$row['price'],$row['bus_id'],$row['startcity'],$row['endcity']);
+             $scheds[]=$sched;
+             
+        }return $scheds;
+    }else return $scheds=[];
     }
     public function getSchedulesByCitiesAndDateandfilter_price($departureCity, $arrivalCity, $travelDate, $numPeople, $priceFilter)
     {
@@ -131,10 +167,13 @@ class ScheduleDAO {
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        return $result;
-    }else{
-        return $result=[];
-    }
+        $scheds= array();
+        foreach($result as $row){
+            $sched = new Schedule($row['id'],$row['date'],$row['departuretime'],$row['arrivaltime'],$row['availableseats'],$row['price'],$row['bus_id'],$row['startcity'],$row['endcity']);
+             $scheds[]=$sched;
+             
+        }return $scheds;
+    }else return $scheds=[];
     }
 
     public function getSchedulesByCitiesAndDateandfilter_morning($departureCity, $arrivalCity, $travelDate, $numPeople, $morning)
@@ -172,10 +211,13 @@ class ScheduleDAO {
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        return $result;
-    }else{
-        return $result=[];
-    }
+        $scheds= array();
+        foreach($result as $row){
+            $sched = new Schedule($row['id'],$row['date'],$row['departuretime'],$row['arrivaltime'],$row['availableseats'],$row['price'],$row['bus_id'],$row['startcity'],$row['endcity']);
+             $scheds[]=$sched;
+             
+        }return $scheds;
+    }else return $scheds=[];
     }
 
     public function getSchedulesByCitiesAndDateandfilter_evning($departureCity, $arrivalCity, $travelDate, $numPeople, $evning)
@@ -212,11 +254,13 @@ class ScheduleDAO {
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        return $result;
-    }else{
-        return $result=[];
-    }
+        $scheds= array();
+        foreach($result as $row){
+            $sched = new Schedule($row['id'],$row['date'],$row['departuretime'],$row['arrivaltime'],$row['availableseats'],$row['price'],$row['bus_id'],$row['startcity'],$row['endcity']);
+             $scheds[]=$sched;
+            
+        } return $scheds;
+    }else return $scheds=[];
     }
     public function getSchedulesByCitiesAndDateandfilter_night($departureCity, $arrivalCity, $travelDate, $numPeople, $night)
     {
@@ -252,11 +296,13 @@ class ScheduleDAO {
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        return $result;
-    }else{
-        return $result=[];
-    }
+        $scheds= array();
+        foreach($result as $row){
+            $sched = new Schedule($row['id'],$row['date'],$row['departuretime'],$row['arrivaltime'],$row['availableseats'],$row['price'],$row['bus_id'],$row['startcity'],$row['endcity']);
+             $scheds[]=$sched;
+        }
+        return $scheds;
+    }else return $scheds=[];
     }
 
 

@@ -19,16 +19,16 @@
         <tbody>
         <?php foreach ($company as $comp){ ?>
           <tr>
-          <td><?= $comp['id']; ?></td>
-          <td><?= $comp['companyname']; ?></td>
-          <td><?= $comp['shortname']; ?></td>
+          <td><?= $comp->getId(); ?></td>
+          <td><?= $comp->getCompanyname(); ?></td>
+          <td><?= $comp->getShortname(); ?></td>
           <td class="img-fluid">
-    <img src="view\images\<?= $comp['img'];?>" alt="company img">
+    <img src="view\images\<?= $comp->getImg();?>" alt="company img">
 </td>
           <td class="d-flex justify-content-center">
           
-                <a href="index.php?action=modify_company&id=<?= $comp['id']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delet_compe&id=<?= $comp['id']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
+                <a href="index.php?action=modify_company&id=<?= $comp->getId(); ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
+                <a href="index.php?action=delet_compe&id=<?= $comp->getId(); ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 

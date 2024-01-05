@@ -49,7 +49,7 @@
                                  <?php foreach ($villes as $ville) { ?>
 
                                     <option>
-                                       <?= $ville['cityname']; ?>
+                                       <?= $ville->getCityname(); ?>
                                     </option>
                                  <?php } ?>
                               </select>
@@ -61,7 +61,7 @@
                                  <?php foreach ($villes as $ville) { ?>
 
                                     <option>
-                                       <?= $ville['cityname']; ?>
+                                       <?= $ville->getCityname(); ?>
                                     </option>
                                  <?php } ?>
                               </select>

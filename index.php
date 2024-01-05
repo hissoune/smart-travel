@@ -12,7 +12,7 @@ switch ($action) {
         require_once 'Controller\buscontroler\buscontroler.php';
         $controlerbus = new Controler_bus();
         $controlerbus->get_buses();
-    
+         break;
     case 'bus_management':
         require_once 'Controller\buscontroler\buscontroler.php';
         $controlerbus = new Controler_bus();

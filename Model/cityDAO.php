@@ -14,7 +14,12 @@ class CityDAO{
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
 
-}
+        $citys = array();
+        foreach ($result as $row) {
+            $city = new City($row['cityname']);
+            $citys[] = $city;
+        
+    }
+    return $citys;
+ }}

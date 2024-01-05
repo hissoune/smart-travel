@@ -4,6 +4,7 @@ include 'Model\ScheduleDao.php';
 
 
 
+
   class Controler_schet{
    
     public static function get_scheduel(){
@@ -93,6 +94,7 @@ public static function get_scheduel_filred_evning($departureCity,$arrivalCity,$d
 
   $ScheduleDAO = new ScheduleDAO();
   $schedueles = $ScheduleDAO->getSchedulesByCitiesAndDateandfilter_evning($departureCity,$arrivalCity,$date_trip,$num_papl,$evning);
+  
   require_once 'view\serch.php';
 
 
@@ -118,7 +120,7 @@ public static function insert_data_sched(){
 
     // Split the rout value into startcity and endcity
     list($startcity, $endcity) = explode('-', $rout);
-    $schedule = new Schedule($date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
+    $schedule = new Schedule('',$date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
         
     $ScheduleDAO = new ScheduleDAO();
     $ScheduleDAO->addSchedule($schedule);
@@ -139,7 +141,7 @@ public static function update_sched(){
 
     // Split the rout value into startcity and endcity
     list($startcity, $endcity) = explode('-', $rout);
-    $schedule = new Schedule($date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
+    $schedule = new Schedule('',$date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
         
     $ScheduleDAO = new ScheduleDAO();
     $ScheduleDAO->addSchedule($schedule);
@@ -151,7 +153,7 @@ public static function updat_data_sched(){
 
     // Split the rout value into startcity and endcity
     list($startcity, $endcity) = explode('-', $rout);
-    $schedule = new Schedule($date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
+    $schedule = new Schedule('',$date_sched, $departuretime, $arrivaltime, $availableseats, $price, $bus_id, $startcity, $endcity);
     $ScheduleDAO = new ScheduleDAO();
     $ScheduleDAO->updateSchedule($schedule , $id);
     header('location:index.php?action=scheduel_management');

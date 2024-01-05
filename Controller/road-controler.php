@@ -66,7 +66,7 @@ class RouteController
             return $route;
     }
 
-    public function delet_rout($starcitylast,$endcitylast)
+    public static function delet_rout($starcitylast,$endcitylast)
     {
         $routeDAO = new RoadDao();
         $routeDAO-> delet_Rout($starcitylast,$endcitylast);

@@ -12,7 +12,16 @@ class RoadDao {
         $query = "SELECT * FROM Road";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+
+        $Roads = array();
+        foreach($result as $row){
+            $road = new Route($row['distance'],$row['duration'],$row['startcity'],$row['endcity']);
+            $Roads[]=$road;
+        }
+
+        
+        return $Roads;
+    
     }
     
     public function addRoad($route) {

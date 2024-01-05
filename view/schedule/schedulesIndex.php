@@ -24,21 +24,21 @@
         <tbody>
         <?php foreach ($Schedule as $Schedul){ ?>
           <tr>
-          <td><?= $Schedul['id']; ?></td>
-          <td><?= $Schedul['date']; ?></td>
-          <td><?= $Schedul['departuretime']; ?></td>
-          <td><?= $Schedul['arrivaltime']; ?></td>
-          <td><?= $Schedul['availableseats']; ?></td>
-          <td><?= $Schedul['price']; ?></td>
-          <td><?= $Schedul['bus_id']; ?></td>
-          <td><?= $Schedul['startcity']; ?></td>
-          <td><?= $Schedul['endcity']; ?></td>
+          <td><?= $Schedul->getId(); ?></td>
+          <td><?= $Schedul->getDate(); ?></td>
+          <td><?= $Schedul->getDepartureTime(); ?></td>
+          <td><?= $Schedul->getArrivalTime(); ?></td>
+          <td><?= $Schedul->getAvailableSeats(); ?></td>
+          <td><?= $Schedul->getPrice(); ?></td>
+          <td><?= $Schedul->getBusId(); ?></td>
+          <td><?= $Schedul->getStartCity(); ?></td>
+          <td><?= $Schedul->getEndCity(); ?></td>
           
        
           <td class="d-flex justify-content-center">
           
-                <a href="index.php?action=modify_sched&id=<?= $Schedul['id']; ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
-                <a href="index.php?action=delet_sched&id=<?= $Schedul['id']; ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
+                <a href="index.php?action=modify_sched&id=<?= $Schedul->getId(); ?>"  class="btn btn-outline-light btn-success text-light ">modify</a>
+                <a href="index.php?action=delet_sched&id=<?= $Schedul->getId(); ?>" class="btn btn-outline-light btn-danger text-light">Delete</a>
           </td>
                 
 

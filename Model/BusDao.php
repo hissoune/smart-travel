@@ -1,5 +1,6 @@
 <?php
 require_once 'Model\ClassBus.php';
+require_once 'Model\ClassCompany.php';
 
 class BusDao {
     private $db;
@@ -12,8 +13,22 @@ class BusDao {
         $query = "SELECT * FROM Bus";
         $stmt = $this->db->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        $buses = array();
+        foreach ($result as $row) {
+            $bus = new Bus($row['id'], $row['busnumber'], $row['licenseplate'], $row['capacity'], $row['comp_id']);
+            $buses[] = $bus;
+        }
+        return $buses;
     }
+    public function get_companyname_byid($id){
+           $query= "SELECT company.companyname from Bus join company on Bus.comp_id=company.id  where comp_id= $id GROUP BY companyname";
+           $stmt = $this->db->query($query);
+           $result = $stmt->fetch(PDO::FETCH_ASSOC);
+           return $result['companyname'];
+        
+    }
+    
+    
     public function get_bus_byid($id) {
         $query = "SELECT * FROM Bus  where id = $id "  ;
         $stmt = $this->db->query($query);
